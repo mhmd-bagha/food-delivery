@@ -1,0 +1,12 @@
+@import "src/styles/styles";
+
+.bottom_navigate_icon {
+  & svg path {
+    transition: all .23s ease;
+    stroke: $auro_metal_saurus;
+  }
+
+  &.active svg path {
+    stroke: $red_coral;
+  }
+}

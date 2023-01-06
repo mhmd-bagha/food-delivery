@@ -1,0 +1,36 @@
+$red_coral: #FF3B2F;
+$auro_metal_saurus: #657188;
+$mirage: #181D2D;
+$dark: #1D2335;
+$white: #fff;
+$burlywood: #E0BF81;
+$gunmetal: #283048;
+
+body {
+  height: 100vh;
+}
+
+// class
+.bg_mirage {
+  background: $mirage !important;
+}
+
+.bg_dark {
+  background: $dark !important;
+}
+
+.bg_red_coral {
+  background: $red_coral !important;
+}
+
+.bg_gunmetal {
+  background: $gunmetal !important;
+}
+
+.color-auro_metal_saurus {
+  color: $auro_metal_saurus !important;
+}
+
+.color-burlywood {
+  color: $burlywood !important;
+}

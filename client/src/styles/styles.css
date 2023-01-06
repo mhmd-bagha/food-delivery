@@ -1,0 +1,21 @@
+body {
+  height: 100vh;
+}
+
+.bg_mirage {
+  background: #181D2D;
+}
+
+.bg_dark {
+  background: #1D2335;
+}
+
+.bg_red_coral {
+  background: #FF3B2F !important;
+}
+
+.color-auro_metal_saurus {
+  color: #657188 !important;
+}
+
+/*# sourceMappingURL=styles.css.map */

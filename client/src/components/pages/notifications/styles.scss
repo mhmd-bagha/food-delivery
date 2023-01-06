@@ -1,0 +1,5 @@
+@import 'src/styles/styles';
+
+.bg_notification:nth-child(odd) {
+  background: $mirage !important;
+}
