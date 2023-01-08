@@ -1,0 +1,37 @@
+@import "styles";
+
+.form_group {
+  position: relative;
+
+  // input
+  .form_input {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1.1em;
+    border: .1rem rgba(101, 113, 136, 0.41) solid;
+    outline: none;
+    background: $mirage;
+    color: $white;
+    margin: 1rem 0 1rem 0;
+    transition: all .3s ease-out;
+    position: relative;
+  }
+
+  // label
+  .form_label {
+    position: absolute;
+    color: $auro_metal_saurus;
+    font-size: .8rem;
+    left: 1rem;
+    transition: all .4s ease-in;
+    padding: 0 .7rem;
+  }
+
+  .form_input:is(:focus, :valid) + .form_label {
+    transform: translate(-1.1rem, -2.1rem);
+  }
+
+  .form_input:is(:valid, :focus), .form_label {
+    margin-top: 2.1rem;
+  }
+}

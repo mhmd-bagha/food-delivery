@@ -1,0 +1,30 @@
+@import "src/styles/styles";
+
+.tabs_login {
+  // tab
+  & .tab {
+    color: $auro_metal_saurus;
+    cursor: pointer;
+    outline: none;
+  }
+
+  // active tab
+  & .react-tabs__tab--selected {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    position: relative;
+    color: $white;
+    // after
+    &:after {
+      position: absolute;
+      content: '';
+      width: 7rem;
+      height: .3rem;
+      background: $red_coral;
+      bottom: 0;
+      margin-bottom: -1rem;
+      border-radius: .5rem;
+    }
+  }
+}

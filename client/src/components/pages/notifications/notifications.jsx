@@ -4,7 +4,7 @@ const NotificationsView = () => {
     return (
         <>
             {/* scroll notifications */}
-            <div className="overflow-y-auto h-4/5 mt-12">
+            <div className="overflow-y-auto h-4/5 mt-9">
                 {/* notification box */}
                 <div className="flex items-center bg_notification py-6 px-12">
                     {/* number */}
