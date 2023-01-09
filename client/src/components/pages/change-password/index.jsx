@@ -1,7 +1,16 @@
+import "../../../styles/styles.scss";
+import Header from "../login/header";
+
 const ChangePassword = () => {
     return (
         <>
-            <div className="bg_mirage px-8 py-12 rounded-t-main fixed bottom-0 w-full h-4/5">
+            {/* image header */}
+            <div className="bg_mirage">
+                {/* header */}
+                <Header/>
+            </div>
+            {/* content */}
+            <div className="bg_dark px-8 py-12 rounded-t-main fixed bottom-0 w-full z-10">
                 <p className="text-gray-200 text-xl font-medium">Change Password</p>
                 {/* old password */}
                 <div className="form_group mt-8 mb-4">
@@ -28,6 +37,8 @@ const ChangePassword = () => {
                     </button>
                 </form>
             </div>
+            {/* bg class */}
+            <div className="bg_content_glass"></div>
         </>
     )
 }

@@ -27,6 +27,18 @@ body {
   background: $gunmetal !important;
 }
 
+.bg_content_glass {
+  &:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(4px);
+    top: 0;
+  }
+}
+
+
 .color-auro_metal_saurus {
   color: $auro_metal_saurus !important;
 }

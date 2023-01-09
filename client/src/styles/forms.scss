@@ -28,7 +28,7 @@
   }
 
   .form_input:is(:focus, :valid) + .form_label {
-    transform: translate(-1.1rem, -2.1rem);
+    transform: translate(-1.1rem, -2rem);
   }
 
   .form_input:is(:valid, :focus), .form_label {
