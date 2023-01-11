@@ -1,4 +1,3 @@
-import Back from "../../tools/back";
 import Header from "./header";
 import CartItems from './cart-items'
 import Footer from "./footer";

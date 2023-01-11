@@ -7,6 +7,7 @@ import Notifications from "./components/pages/notifications";
 import Login from "./components/pages/login";
 import ForgotPassword from "./components/pages/forgot-password";
 import ChangePassword from "./components/pages/change-password";
+import Payment from "./components/pages/payment";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
             <Route path='/login' element={<Login/>}/>
             <Route path='/forgot-password' element={<ForgotPassword/>}/>
             <Route path='/change-password' element={<ChangePassword/>}/>
+            <Route path='/payment' element={<Payment/>}/>
         </Routes>
     );
 }

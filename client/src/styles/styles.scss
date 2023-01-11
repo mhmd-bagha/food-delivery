@@ -5,7 +5,20 @@ $dark: #1D2335;
 $white: #fff;
 $burlywood: #E0BF81;
 $gunmetal: #283048;
+$black: #000;
 
+// font family
+@font-face {
+  font-family: 'Nunito';
+  src: url('../assets/fonts/nunito/Nunito-SemiBold.ttf') format('truetype');
+}
+
+// all elements
+* {
+  font-family: 'Nunito', serif;
+}
+
+// body styles
 body {
   height: 100vh;
 }

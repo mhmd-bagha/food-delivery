@@ -1,0 +1,53 @@
+@import "src/styles/styles";
+
+.form_check_label {
+  padding: 1.5rem 1rem 1.5rem 1rem;
+  border: 1px solid $gunmetal;
+  border-radius: 1.5rem;
+  // hidden input radio
+  .pay_select {
+    display: none;
+    position: absolute;
+    // checked radio button
+    &:checked {
+      // change color to black
+      ~ .text_pay {
+        color: $black;
+      }
+
+      // active dot
+      ~ .dot {
+        position: relative;
+        border: .125rem solid $red_coral;
+        background: $white;
+        display: flex;
+        justify-content: center;
+        // center dot after checked input
+        &:before {
+          position: absolute;
+          content: "";
+          width: .8rem;
+          height: .8rem;
+          background: $red_coral;
+          top: .12rem;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+
+  // create dot radio
+  .dot {
+    width: 1.3rem;
+    height: 1.3rem;
+    background: transparent;
+    border: .125rem solid $gunmetal;
+    border-radius: 50%;
+  }
+
+  // text pay default white
+  .text_pay {
+    color: $white;
+  }
+}

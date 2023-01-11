@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 const Footer = () => {
   return (
       <>
@@ -9,7 +11,7 @@ const Footer = () => {
                   <p className="text-2xl font-bold text-gray-100">$33,50</p>
               </div>
               {/* next to top level */}
-              <button type="button" className="bg_red_coral text-white font-bold px-20 py-4 rounded-2xl">Next</button>
+              <Link to="/payment" className="bg_red_coral text-white font-bold px-20 py-4 rounded-2xl">Next</Link>
           </div>
       </>
   )
