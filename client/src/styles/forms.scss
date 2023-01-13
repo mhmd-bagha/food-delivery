@@ -4,7 +4,7 @@
   position: relative;
 
   // input
-  .form_input {
+  .form_input, .form_input_internal {
     width: 100%;
     padding: 1rem;
     border-radius: 1.1em;
@@ -18,7 +18,7 @@
   }
 
   // label
-  .form_label {
+  .form_label, .form_label_internal {
     position: absolute;
     color: $auro_metal_saurus;
     font-size: .8rem;
@@ -33,5 +33,17 @@
 
   .form_input:is(:valid, :focus), .form_label {
     margin-top: 2.1rem;
+  }
+
+  // form internal
+  .form_label_internal {
+    margin-top: 2.1rem;
+  }
+
+  .form_input_internal:is(:focus, :valid) {
+    padding: 1.7rem 0 .5rem 1.6rem;
+    & + .form_label_internal {
+      transform: translate(0, -.6rem);
+    }
   }
 }
