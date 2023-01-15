@@ -6,6 +6,7 @@ $white: #fff;
 $burlywood: #E0BF81;
 $gunmetal: #283048;
 $black: #000;
+$rounded_main: 3rem;
 
 // font family
 @font-face {
@@ -51,6 +52,9 @@ body {
   }
 }
 
+.bg_auro_metal_saurus {
+  background: $auro_metal_saurus !important;
+}
 
 .color-auro_metal_saurus {
   color: $auro_metal_saurus !important;
@@ -58,4 +62,21 @@ body {
 
 .color-burlywood {
   color: $burlywood !important;
+}
+
+.color-red_coral {
+  color: $red_coral !important;
+}
+
+// rounded
+.rounded-full-main {
+  border-radius: 2.3rem;
+}
+
+.rounded-b-main {
+  border-radius: 0 0 $rounded_main $rounded_main;
+}
+
+.rounded-t-main {
+  border-radius: $rounded_main $rounded_main 0 0;
 }

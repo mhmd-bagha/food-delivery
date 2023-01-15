@@ -11,7 +11,7 @@ const Footer = () => {
                     <p className="text-2xl font-bold text-gray-100">$33,50</p>
                 </div>
                 {/* next to top level */}
-                <Link to="/pay" className="bg_red_coral text-white font-bold px-14 py-4 rounded-2xl">Order Now</Link>
+                <Link to="/delivery-information" className="bg_red_coral text-white font-bold px-14 py-4 rounded-2xl">Order Now</Link>
             </div>
         </>
     )
