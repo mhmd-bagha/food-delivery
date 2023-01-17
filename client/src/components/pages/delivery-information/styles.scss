@@ -1,0 +1,38 @@
+@import "src/styles/styles";
+
+.dots_down {
+  display: grid;
+  // white dot
+  .dot_white {
+    position: relative;
+    margin: .3rem 0 .3rem .6rem;
+
+    &:after {
+      position: absolute;
+      content: '';
+      width: .25rem;
+      height: .25rem;
+      background: $white;
+      border-radius: 100%;
+    }
+  }
+
+  // dark dot
+  .dot_dark {
+    position: relative;
+    margin: .3rem 0 .3rem .6rem;
+
+    &:after {
+      position: absolute;
+      content: '';
+      width: .25rem;
+      height: .25rem;
+      background: $auro_metal_saurus;
+      border-radius: 100%;
+    }
+  }
+}
+
+.courier_rate * {
+  display: inline-block !important;
+}
