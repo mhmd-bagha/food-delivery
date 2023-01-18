@@ -5,7 +5,7 @@ import "./styles.scss";
 import {IoMdCall} from "react-icons/io";
 import {Rating} from 'react-simple-star-rating'
 import {useEffect, useState} from "react";
-import {MapView} from "../../tools/mapSetting";
+import MapView from "../../tools/mapView";
 
 const DeliveryInformation = () => {
     const [downEl, setDownEl] = useState(false); // state get down true/false card address
@@ -19,7 +19,6 @@ const DeliveryInformation = () => {
             var scrollTopCurrentPage = document.scrollingElement.scrollTop; // get scroll height page current
             (scrollTopCurrentPage <= scrollTopDefault) ? setDownEl(false) : setDownEl(true);
         })
-        return MapView
     })
 
     return (
@@ -31,7 +30,7 @@ const DeliveryInformation = () => {
                     <Header/>
                 </div>
                 {/* map */}
-                <div id="map" className="h-80 w-full"></div>
+                <MapView/>
                 {/* information time from restaurant */}
                 <div className="px-8 py-8 w-full fixed bottom-0 z-10">
                     {/* time from restaurant to home  */}
