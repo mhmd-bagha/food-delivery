@@ -4,35 +4,40 @@ import {FaMapMarkedAlt} from "react-icons/fa";
 import "./styles.scss";
 import {IoMdCall} from "react-icons/io";
 import {Rating} from 'react-simple-star-rating'
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import MapView from "../../tools/mapView";
 
 const DeliveryInformation = () => {
     const [downEl, setDownEl] = useState(false); // state get down true/false card address
+    const getMap = useRef(null) // get map view ref
     let classScrollAddress;
     (!downEl) ? classScrollAddress = 'top-9' : classScrollAddress = 'top-44'; // check the false/true then add class
     var scrollTopDefault = 20; // set default variable scroll top
 
     useEffect(() => {
-        // scroll down/up card address
-        document.addEventListener('scroll', () => {
-            var scrollTopCurrentPage = document.scrollingElement.scrollTop; // get scroll height page current
-            (scrollTopCurrentPage <= scrollTopDefault) ? setDownEl(false) : setDownEl(true);
-        })
-    })
+        // check exist map
+        let map_view = document.getElementById('map_view')
+        if (getMap && getMap.current) {
+            // scroll down/up card address
+            getMap.current.addEventListener('scroll', () => {
+                var scrollTopCurrentPage = document.scrollingElement.scrollTop; // get scroll height page current
+                (scrollTopCurrentPage <= scrollTopDefault) ? setDownEl(false) : setDownEl(true);
+            })
+        }
+    }, [getMap])
 
     return (
         <>
             {/* start page */}
             <section className="bg_mirage min-h-full">
                 {/* header */}
-                <div className="px-12 fixed top-8 z-10 w-full">
+                <div className="px-12 fixed top-8 z-[402] w-full">
                     <Header/>
                 </div>
                 {/* map */}
-                <MapView/>
+                <MapView mapId='map_view' refMap={getMap}/>
                 {/* information time from restaurant */}
-                <div className="px-8 py-8 w-full fixed bottom-0 z-10">
+                <div className="px-8 py-8 w-full fixed bottom-0 z-[402]">
                     {/* time from restaurant to home  */}
                     <div
                         className={`bg_dark px-7 py-8 rounded-full-main relative ${classScrollAddress} z-10 transition-all ease-in-out duration-700`}

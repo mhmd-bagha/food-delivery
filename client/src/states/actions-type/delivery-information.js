@@ -1,0 +1,1 @@
+export const STATUS_UP_DOWN_ADDRESS_CARD = false // set default up/down address card
