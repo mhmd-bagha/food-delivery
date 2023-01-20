@@ -1,12 +1,12 @@
-import {Circle, MapContainer, Marker, Pane, Popup, TileLayer, useMapEvents} from 'react-leaflet'
-import {useEffect, useState} from "react";
+import {Circle, MapContainer, Marker, Pane, TileLayer, useMapEvents} from 'react-leaflet'
+import {connect} from "react-redux";
+import {PositionMap, UpDownAddressCard} from "../../states/actions/delivery-information";
+import {useEffect} from "react";
 
-const MapView = ({mapId, refMap}) => {
-    const zoom = 16
-    const [position, setPosition] = useState([51.505, -0.09]) // set position/default position
+const MapView = ({setUpDownAddressCard, deliveryInformationProps, setPositionMap, refCurrentMap}) => {
+    const zoom = 16 // set default zoom in map
     // set setting map
     function MapSetting() {
-        // variables
         let lat, lng
         // check the support geolocation
         (navigator.geolocation) ? navigator.geolocation.getCurrentPosition(successMap, errorMap) : console.log('not support browser from geolocation');
@@ -15,58 +15,79 @@ const MapView = ({mapId, refMap}) => {
         function successMap(pos) {
             lat = pos.coords.latitude
             lng = pos.coords.longitude
-            const accuracy = pos.coords.accuracy
-            setPosition([lat, lng])
-            map.flyTo([lat, lng], zoom)
+            setPositionMap([lat, lng])
         }
 
         // error access map
         function errorMap(error) {
-            return (error.code) ? console.log('please access location') : console.log('cannot access location')
+            switch (error.code) {
+                case 1:
+                    return alert('please access location')
+                case 3:
+                    return console.log('time out get map location')
+                default:
+                    return
+            }
         }
 
         // click the map
         const map = useMapEvents({
+            // move map
             move: () => {
-
+                setUpDownAddressCard(true)
             },
+            // move end map
             moveend: () => {
-
-            },
-            click: () => {
-                map.locate();
+                setUpDownAddressCard(false)
             },
             // location found map
             locationfound(location) {
-                setPosition(location.latlng)
-                map.flyTo(location.latlng, zoom)
+                setPositionMap(location.latlng)
+                map.flyTo(location.latlng, map.getZoom())
             },
+        })
+        // get button current location
+        let current_location = document.getElementById('current_location');
+        useEffect(() => {
+            current_location.addEventListener('click', () => {
+                map.locate().getCenter()
+            })
         })
     }
 
     return (
         <>
-            <MapContainer center={position} zoom={16} scrollWheelZoom={true} id={mapId}
-                          className="h-screen w-full bg_dark" ref={refMap}>
-
+            <MapContainer center={deliveryInformationProps.position_map} zoom={zoom} scrollWheelZoom={true}
+                          zoomControl={false}
+                          className="h-screen w-full bg_mirage">
                 {/* run settings map */}
                 <MapSetting/>
                 {/* circle map */}
                 <Pane name="custom" style={{zIndex: 402}}>
-                    <Circle center={position} radius={250}/>
+                    <Circle center={deliveryInformationProps.position_map} radius={250}/>
                 </Pane>
                 {/* contributors map */}
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
                 {/* person marker map */}
-                <Marker position={position}>
-                    {/* popup on click map */}
-                    <Popup>
-                        A pretty CSS3 popup. <br/> Easily customizable.
-                    </Popup>
-                </Marker>
+                <Marker position={deliveryInformationProps.position_map}/>
             </MapContainer>
         </>
     )
 }
-export default MapView
+
+// states
+const mapStateToProps = (state) => {
+    return {
+        deliveryInformationProps: state.deliveryInformation
+    }
+}
+
+// dispatch
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setUpDownAddressCard: (data) => UpDownAddressCard(dispatch, data),
+        setPositionMap: (data) => PositionMap(dispatch, data)
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MapView)

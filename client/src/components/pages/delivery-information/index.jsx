@@ -1,30 +1,19 @@
-import Header from "./header";
 import {FcAlarmClock} from "react-icons/fc";
 import {FaMapMarkedAlt} from "react-icons/fa";
 import "./styles.scss";
 import {IoMdCall} from "react-icons/io";
 import {Rating} from 'react-simple-star-rating'
-import {useEffect, useRef, useState} from "react";
 import MapView from "../../tools/mapView";
+import {connect} from 'react-redux'
+import {PositionMap, UpDownAddressCard} from "../../../states/actions/delivery-information";
+import Back from "../../tools/back";
+import {TbCurrentLocation} from "react-icons/tb";
+import {useRef} from "react";
 
-const DeliveryInformation = () => {
-    const [downEl, setDownEl] = useState(false); // state get down true/false card address
-    const getMap = useRef(null) // get map view ref
-    let classScrollAddress;
-    (!downEl) ? classScrollAddress = 'top-9' : classScrollAddress = 'top-44'; // check the false/true then add class
-    var scrollTopDefault = 20; // set default variable scroll top
-
-    useEffect(() => {
-        // check exist map
-        let map_view = document.getElementById('map_view')
-        if (getMap && getMap.current) {
-            // scroll down/up card address
-            getMap.current.addEventListener('scroll', () => {
-                var scrollTopCurrentPage = document.scrollingElement.scrollTop; // get scroll height page current
-                (scrollTopCurrentPage <= scrollTopDefault) ? setDownEl(false) : setDownEl(true);
-            })
-        }
-    }, [getMap])
+const DeliveryInformation = ({deliveryInformationProps, setCurrentPositionMap, setUpDownAddressCard}) => {
+    const btnCurrentMap = useRef(null)
+    let classUpDownAddressCard; // create variable class up/down address card
+    (!deliveryInformationProps.up_down_address_card) ? classUpDownAddressCard = 'top-9' : classUpDownAddressCard = 'top-44'; // check the false/true then add class
 
     return (
         <>
@@ -32,21 +21,27 @@ const DeliveryInformation = () => {
             <section className="bg_mirage min-h-full">
                 {/* header */}
                 <div className="px-12 fixed top-8 z-[402] w-full">
-                    <Header/>
+                    <div className="flex justify-between items-center">
+                        {/* back button */}
+                        <Back/>
+                        {/* current location */}
+                        <button id="current_location" className="bg_dark p-2.5 rounded-2xl border border-gray-700" ref={btnCurrentMap}>
+                            <TbCurrentLocation size={17} className="text-white"/></button>
+                    </div>
                 </div>
                 {/* map */}
-                <MapView mapId='map_view' refMap={getMap}/>
+                <MapView refCurrentMap={btnCurrentMap}/>
                 {/* information time from restaurant */}
                 <div className="px-8 py-8 w-full fixed bottom-0 z-[402]">
                     {/* time from restaurant to home  */}
                     <div
-                        className={`bg_dark px-7 py-8 rounded-full-main relative ${classScrollAddress} z-10 transition-all ease-in-out duration-700`}
+                        className={`bg_dark px-7 py-8 rounded-full-main relative ${classUpDownAddressCard} z-10 transition-all ease-in-out duration-700`}
                         id="card_address">
                         {/* button close data courier */}
                         <div className="w-full flex justify-center mb-5">
                             <button
                                 className="relative after:content-[''] w-16 h-1 bg_auro_metal_saurus rounded-full bottom-4"
-                                onClick={() => downEl ? setDownEl(false) : setDownEl(true)}></button>
+                                onClick={() => deliveryInformationProps.up_down_address_card ? setUpDownAddressCard(false) : setUpDownAddressCard(true)}></button>
                         </div>
                         {/* time */}
                         <div className="flex items-center">
@@ -117,4 +112,18 @@ const DeliveryInformation = () => {
         </>
     )
 }
-export default DeliveryInformation
+
+// states
+const mapStateToProps = (state) => {
+    return {
+        deliveryInformationProps: state.deliveryInformation
+    }
+}
+// dispatch
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setUpDownAddressCard: (data) => UpDownAddressCard(dispatch, data),
+        setCurrentPositionMap: (data) => PositionMap(dispatch, data)
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(DeliveryInformation)
