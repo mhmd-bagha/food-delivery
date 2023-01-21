@@ -50,7 +50,7 @@ const MapView = ({setUpDownAddressCard, deliveryInformationProps, setPositionMap
         let current_location = document.getElementById('current_location');
         useEffect(() => {
             current_location.addEventListener('click', () => {
-                map.locate().getCenter()
+                return map.locate().getCenter()
             })
         })
     }
