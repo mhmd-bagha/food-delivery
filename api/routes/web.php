@@ -18,9 +18,9 @@ use App\Http\Controllers\FoodCategoryController;
 // the routes api on food
 Route::prefix('food')->group(function () {
     // get all foods from category
-    Route::get('/category/{category}', [FoodController::class, 'foodsCategory']);
+    Route::post('/category/{category}', [FoodController::class, 'foodsCategory']);
     // get all categories
-    Route::get('/categories', [FoodCategoryController::class, 'getCategories']);
+    Route::post('/categories', [FoodCategoryController::class, 'getCategories']);
     // get data food
-    Route::get('/get/{foodId}', [FoodController::class, 'food']);
+    Route::post('/get/{foodId}', [FoodController::class, 'food']);
 });
