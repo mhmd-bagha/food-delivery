@@ -21,4 +21,6 @@ Route::prefix('food')->group(function () {
     Route::get('/category/{category}', [FoodController::class, 'foodsCategory']);
     // get all categories
     Route::get('/categories', [FoodCategoryController::class, 'getCategories']);
+    // get data food
+    Route::get('/get/{foodId}', [FoodController::class, 'food']);
 });
