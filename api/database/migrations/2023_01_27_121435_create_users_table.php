@@ -16,8 +16,9 @@ return new class extends Migration {
             $table->id();
             $table->string('first_name', 20);
             $table->string('last_name', 20);
-            $table->string('phone_number', 16);
-            $table->string('email');
+            $table->string('phone_number', 16)->nullable();
+            $table->string('email', 300);
+            $table->string('password');
             $table->string('image', 300)->nullable();
             $table->string('create_at', 20);
             $table->string('update_at', 20)->nullable();

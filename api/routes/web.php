@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\FoodController;
 use App\Http\Controllers\FoodCategoryController;
+use \App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,11 @@ Route::prefix('food')->group(function () {
     Route::post('/categories', [FoodCategoryController::class, 'getCategories']);
     // get data food
     Route::post('/get/{foodId}', [FoodController::class, 'food']);
+});
+
+// the routes user
+Route::prefix('user')->group(function () {
+    // login and signup
+    Route::get('/login', [UserController::class, 'login']);
+    Route::get('/signup', [UserController::class, 'signup']);
 });
