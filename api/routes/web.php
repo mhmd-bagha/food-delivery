@@ -29,6 +29,8 @@ Route::prefix('food')->group(function () {
 // the routes user
 Route::prefix('user')->group(function () {
     // login and signup
-    Route::get('/login', [UserController::class, 'login']);
-    Route::get('/signup', [UserController::class, 'signup']);
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/signup', [UserController::class, 'signup']);
+    // forgot password
+    Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
 });
