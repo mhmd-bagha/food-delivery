@@ -31,6 +31,7 @@ Route::prefix('user')->group(function () {
     // login and signup
     Route::post('/login', [UserController::class, 'login']);
     Route::post('/signup', [UserController::class, 'signup']);
-    // forgot password
+    // forgot password and change password
     Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
+    Route::post('/change-password', [UserController::class, 'changePassword']);
 });

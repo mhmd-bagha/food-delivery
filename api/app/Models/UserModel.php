@@ -27,4 +27,16 @@ class UserModel extends Model
             'update_at' => null
         ]) : false;
     }
+
+    public function changePassword($data)
+    {
+        $user = UserModel::where('email', $data['user']);
+        switch ($user->exists()) {
+            case true:
+                return $user->update(['password' => $data['password']]);
+                break;
+            default:
+                return false;
+        }
+    }
 }
