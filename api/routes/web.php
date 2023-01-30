@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\FoodController;
 use App\Http\Controllers\FoodCategoryController;
 use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,6 @@ Route::prefix('food')->group(function () {
     // get data food
     Route::post('/get/{foodId}', [FoodController::class, 'food']);
 });
-
 // the routes user
 Route::prefix('user')->group(function () {
     // login and signup
@@ -34,4 +34,10 @@ Route::prefix('user')->group(function () {
     // forgot password and change password
     Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
     Route::post('/change-password', [UserController::class, 'changePassword']);
+});
+// the routes cart
+Route::prefix('cart')->group(function () {
+    Route::post('/add', [CartController::class, 'addFood']);
+    Route::post('/get', [CartController::class, 'getCart']);
+    Route::delete('/delete/cart-id/{cart_id}', [CartController::class, 'deleteFood']);
 });

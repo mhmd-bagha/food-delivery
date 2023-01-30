@@ -10,7 +10,7 @@ class UserModel extends Model
     use HasFactory;
 
     protected $table = 'users';
-    protected $fillable = ['first_name', 'last_name', 'phone_number', 'email', 'password', 'image', 'create_at', 'update_at'];
+    protected $fillable = ['first_name', 'last_name', 'phone_number', 'email', 'password', 'image', 'create_at', 'update_at', 'ip'];
     const CREATED_AT = 'create_at';
     const UPDATED_AT = 'update_at';
 
@@ -23,6 +23,7 @@ class UserModel extends Model
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => $data['password'],
+            'ip' => $data['ip'],
             'create_at' => now(),
             'update_at' => null
         ]) : false;
