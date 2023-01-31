@@ -62,10 +62,17 @@ class CartController extends Controller
             exit();
         }
         $user_id = $user_id->validate()['user_id']; // get user id validated
-        $getCartFood = $model->where('user_id', $user_id)->where('status', self::WAIT_CART_STATUS); // get cart isn't empty
-        switch ($getCartFood->exists()) {
+        $cartFoods = $model->where('user_id', $user_id)->where('status', self::WAIT_CART_STATUS); // get cart isn't empty
+        switch ($cartFoods->exists()) {
             case true:
-                $this->messages = ['data' => $getCartFood->get(), 'status' => 200]; // return data cart
+                $totalPrice = 0; // default total price
+                $getCartFoods = $cartFoods->get();
+                // foreach for get total price
+                foreach ($getCartFoods as $getCartFood):
+                    $foodsPrice = FoodModel::find($getCartFood->food_id)->food_price;
+                    $totalPrice += $foodsPrice;
+                endforeach;
+                $this->messages = ['data' => $getCartFoods, 'totalPrice' => $totalPrice, 'status' => 200]; // return data cart
                 break;
             default:
                 $this->messages = ['message' => 'The empty cart', 'status' => 500]; // return response empty cart
