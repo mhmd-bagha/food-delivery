@@ -12,14 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('cart', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name', 20);
-            $table->string('last_name', 20);
-            $table->string('phone_number', 16)->nullable();
-            $table->string('email', 300);
-            $table->string('password');
-            $table->string('image', 300)->nullable();
+            $table->bigInteger('food_id');
+            $table->string('food_count', 10);
+            $table->bigInteger('user_id');
+            $table->enum('status', ['waiting', 'paid', 'unpaid']);
             $table->string('ip');
             $table->string('create_at', 20);
             $table->string('update_at', 20)->nullable();
@@ -33,6 +31,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('cart');
     }
 };
