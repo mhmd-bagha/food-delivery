@@ -14,7 +14,7 @@ const FoodData = () => {
                     {/* food count */}
                     <div className="flex justify-center">
                         <div
-                            className="flex justify-between items-center bg_mirage text-white w-2/5 sm:w-1/5 md:w-1/4 lg:w-1/5 xl:w-1/6 relative top-5 rounded-3xl">
+                            className="flex justify-between items-center bg_mirage text-white w-2/4 sm:w-1/4 md:w-1/4 lg:w-1/4 relative top-5 rounded-3xl">
                             <button type="button" className="p-2.5 bg_dark rounded-full border border-gray-700">
                                 <AiOutlineMinus size={18} className="text-white"/></button>
                             <p className="text-lg font-bold">1</p>

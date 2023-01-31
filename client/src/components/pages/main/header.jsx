@@ -1,15 +1,10 @@
-import Menu from "../../tools/menu";
-import ImageProfile from "../../tools/image-profile";
+import Menu from "../../ui/menu/menu";
 
 const Header = () => {
     return (
         <>
-            <div className="flex justify-between sticky top-0 bg_dark pt-8 z-10">
                 {/* menu */}
-                <Menu/>
-                {/* image person */}
-                <ImageProfile/>
-            </div>
+                <Menu customClass={null}/>
             <p className="text-white mt-10 text-3xl grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 leading-tight">Fast
                 and Delicious Food</p>
         </>

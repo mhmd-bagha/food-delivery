@@ -1,6 +1,6 @@
-import Header from "./header";
 import BottomNavigation from "../../ui/bottom-navigation";
 import NotificationsView from "./notifications";
+import Menu from "../../ui/menu/menu";
 
 const Notifications = () => {
     return (
@@ -9,8 +9,8 @@ const Notifications = () => {
             <section className="bg_mirage h-full">
                 {/* start page */}
                 <div className="bg_dark h-5/6 rounded-b-main">
-                    {/* header */}
-                    <Header/>
+                    {/* the menu and image and text current page */}
+                    <Menu textCurrentPage="Notification"/>
                     {/* notifications */}
                     <NotificationsView/>
                 </div>

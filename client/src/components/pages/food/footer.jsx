@@ -11,7 +11,7 @@ const Footer = () => {
             {/* food price and add to cart */}
             <section className="bg_dark">
                 <div
-                    className="flex justify-between items-center bg_mirage w-full px-14 py-6 fixed bottom-0 lg:relative">
+                    className="flex justify-between items-center bg_mirage w-full px-5 sm:px-14 py-7 fixed bottom-0">
                     {/* price */}
                     <p className="text-xl text-gray-50 font-bold">$14,50</p>
                     {/* add to cart */}

@@ -8,7 +8,7 @@ const NotificationsView = () => {
                 {/* notification box */}
                 <div className="flex items-center bg_notification py-6 px-12">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full p-2.5 mr-6">+20</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-2 mr-6">+20</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
@@ -20,7 +20,7 @@ const NotificationsView = () => {
                 {/* notification box */}
                 <div className="flex items-center bg_notification py-6 px-12">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full p-2.5 mr-6">+20</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-2 mr-6">+20</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
@@ -32,7 +32,7 @@ const NotificationsView = () => {
                 {/* notification box */}
                 <div className="flex items-center bg_notification py-6 px-12">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full p-2.5 mr-6">+20</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-2 mr-6">+20</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
@@ -44,7 +44,7 @@ const NotificationsView = () => {
                 {/* notification box */}
                 <div className="flex items-center bg_notification py-6 px-12">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full p-2.5 mr-6">+20</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-2 mr-6">+20</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
@@ -56,7 +56,7 @@ const NotificationsView = () => {
                 {/* notification box */}
                 <div className="flex items-center bg_notification py-6 px-12">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full p-2.5 mr-6">+20</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-2 mr-6">+20</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
@@ -68,7 +68,7 @@ const NotificationsView = () => {
                 {/* notification box */}
                 <div className="flex items-center bg_notification py-6 px-12">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full p-2.5 mr-6">+20</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-2 mr-6">+20</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}

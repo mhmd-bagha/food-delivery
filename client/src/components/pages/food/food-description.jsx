@@ -5,8 +5,8 @@ const FoodDescription = () => {
     return (
         <>
             {/* food description */}
-            <section className="bg_mirage h-1/2 lg:h-1/3 z-10">
-                <div className="bg_dark px-12 pt-12 rounded-b-main shadow-md">
+            <section className="bg_mirage h-2/3 lg:h-1/3">
+                <div className="bg_dark px-12 py-12 rounded-b-main shadow-md">
                     {/* icons data */}
                     <div className="flex justify-between items-center">
                         {/* fire */}
@@ -32,7 +32,7 @@ const FoodDescription = () => {
                         </div>
                     </div>
                     {/* description */}
-                    <div className="py-7">
+                    <div className="py-10">
                         <p className="text-xl text-white font-medium">Description</p>
                         <p className="mt-2 color-auro_metal_saurus">Lorem ipsum dolor sit amet, consectetur adipisicing
                             elit. Ab ad, adipisci aliquam corporis inventore ipsa, ipsum laudantium nisi pariatur

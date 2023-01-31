@@ -9,11 +9,13 @@ import ForgotPassword from "./components/pages/forgot-password";
 import ChangePassword from "./components/pages/change-password";
 import Payment from "./components/pages/payment";
 import DeliveryInformation from "./components/pages/delivery-information";
+import Profile from "./components/pages/profile";
 
 function App() {
     return (
         <Routes>
             <Route path='/' element={<Index/>} index/>
+            <Route path='category/:category' element={<Index/>}/>
             <Route path='/food/:id' element={<Food/>}/>
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/notifications' element={<Notifications/>}/>
@@ -22,6 +24,7 @@ function App() {
             <Route path='/change-password' element={<ChangePassword/>}/>
             <Route path='/payment' element={<Payment/>}/>
             <Route path='/delivery-information' element={<DeliveryInformation/>}/>
+            <Route path='/profile' element={<Profile/>}/>
         </Routes>
     );
 }

@@ -6,6 +6,7 @@ $white: #fff;
 $burlywood: #E0BF81;
 $gunmetal: #283048;
 $black: #000;
+$malachite: #00D35E;
 $rounded_main: 3rem;
 
 // font family
@@ -47,13 +48,17 @@ body {
     content: "";
     width: 100%;
     height: 100vh;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(9px);
     top: 0;
   }
 }
 
 .bg_auro_metal_saurus {
   background: $auro_metal_saurus !important;
+}
+
+.bg_malachite {
+  background: $malachite !important;
 }
 
 .color-auro_metal_saurus {
@@ -74,9 +79,11 @@ body {
 }
 
 .rounded-b-main {
-  border-radius: 0 0 $rounded_main $rounded_main;
+  border-bottom-left-radius: $rounded_main;
+  border-bottom-right-radius: $rounded_main;
 }
 
 .rounded-t-main {
-  border-radius: $rounded_main $rounded_main 0 0;
+  border-top-left-radius: $rounded_main;
+  border-top-right-radius: $rounded_main;
 }
