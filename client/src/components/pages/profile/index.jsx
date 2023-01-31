@@ -5,6 +5,7 @@ import {FaPhoneAlt} from "react-icons/fa";
 import {HiOutlineCreditCard, HiOutlineMail} from "react-icons/hi";
 import {BsTruck} from "react-icons/bs";
 import {TfiPencil} from "react-icons/tfi";
+import {Link} from "react-router-dom";
 
 const Profile = () => {
     return (
@@ -18,8 +19,7 @@ const Profile = () => {
                     {/* text header */}
                     <p className="text-gray-200 text-lg font-medium text-center ml-10">My Profile</p>
                     {/* button close page */}
-                    <button className="bg_dark rounded-2xl p-2.5"><IoCloseSharp size={20} className="text-gray-200"/>
-                    </button>
+                    <Link to='/' className="bg_dark rounded-2xl p-2.5"><IoCloseSharp size={20} className="text-gray-200"/></Link>
                 </div>
                 {/* header */}
                 <Header/>
