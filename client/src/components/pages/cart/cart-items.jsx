@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 const CartItems = () => {
     return (
         <>
-            <section className="pt-20 mt-10 overflow-y-auto h-5/6">
+            <section className="mt-10 overflow-y-auto h-5/6">
                 {/* items cart */}
                 <div className="flex items-center py-4">
                     {/* image */}

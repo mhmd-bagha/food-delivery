@@ -4,7 +4,7 @@ const Footer = () => {
   return (
       <>
           {/* total price and next top level */}
-          <div className="bg_mirage py-10 px-12 flex justify-between items-center">
+          <div className="bg_mirage py-10 px-5 sm:px-12 flex justify-between items-center">
               {/* total price */}
               <div>
                   <p className="text-sm text-gray-400">Total Price</p>
