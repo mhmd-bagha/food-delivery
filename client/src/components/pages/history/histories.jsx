@@ -6,9 +6,9 @@ const HistoryView = () => {
             {/* scroll history */}
             <div className="overflow-y-auto h-4/5 mt-9">
                 {/* history box */}
-                <div className="flex items-center bg_history py-6 px-12">
+                <div className="flex items-center bg_history py-6 px-10">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full w-12 h-11 mr-6 flex justify-center items-center">+3</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-3 mr-4 flex justify-center items-center">+3</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
@@ -18,9 +18,9 @@ const HistoryView = () => {
                     </div>
                 </div>
                 {/* history box */}
-                <div className="flex items-center bg_history py-6 px-12">
+                <div className="flex items-center bg_history py-6 px-10">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full w-12 h-11 mr-6 flex justify-center items-center">+3</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-3 mr-4 flex justify-center items-center">+3</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
@@ -30,9 +30,9 @@ const HistoryView = () => {
                     </div>
                 </div>
                 {/* history box */}
-                <div className="flex items-center bg_history py-6 px-12">
+                <div className="flex items-center bg_history py-6 px-10">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full w-12 h-11 mr-6 flex justify-center items-center">+3</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-3 mr-4 flex justify-center items-center">+3</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
@@ -42,9 +42,9 @@ const HistoryView = () => {
                     </div>
                 </div>
                 {/* history box */}
-                <div className="flex items-center bg_history py-6 px-12">
+                <div className="flex items-center bg_history py-6 px-10">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full w-12 h-11 mr-6 flex justify-center items-center">+3</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-3 mr-4 flex justify-center items-center">+3</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
@@ -54,9 +54,9 @@ const HistoryView = () => {
                     </div>
                 </div>
                 {/* history box */}
-                <div className="flex items-center bg_history py-6 px-12">
+                <div className="flex items-center bg_history py-6 px-10">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full w-12 h-11 mr-6 flex justify-center items-center">+3</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-3 mr-4 flex justify-center items-center">+3</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
@@ -66,9 +66,9 @@ const HistoryView = () => {
                     </div>
                 </div>
                 {/* history box */}
-                <div className="flex items-center bg_history py-6 px-12">
+                <div className="flex items-center bg_history py-6 px-10">
                     {/* number */}
-                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full w-12 h-11 mr-6 flex justify-center items-center">+3</p>
+                    <p className="bg-green-800 text-gray-200 font-bold border-2 border-green-600 rounded-full py-2.5 px-3 mr-4 flex justify-center items-center">+3</p>
                     {/* message and day time */}
                     <div className="w-10/12">
                         {/* message */}
