@@ -38,31 +38,37 @@ const Menu = ({imageProfile = true, textCurrentPage = undefined, customClass = '
                 {/* content menu */}
                 <div className="mt-20">
                     {/* favorite */}
-                    <NavLink to="favorites" className="flex items-center py-4"><FiHeart size={21}
-                                                                                        className="color-auro_metal_saurus"/>
+                    <NavLink to="/favorites" className="flex items-center py-4"
+                             onClick={() => setStatusMenu(false)}><FiHeart size={21}
+                                                                           className="color-auro_metal_saurus"/>
                         <p className="text-gray-200 text-sm font-medium ml-4">Favorites</p></NavLink>
                     {/* my order */}
-                    <NavLink to="/cart" className="flex items-center py-4"><IoBagHandleOutline size={21}
-                                                                                               className="color-auro_metal_saurus"/>
+                    <NavLink to="/cart" className="flex items-center py-4"
+                             onClick={() => setStatusMenu(false)}><IoBagHandleOutline size={21}
+                                                                                      className="color-auro_metal_saurus"/>
                         <p className="text-gray-200 text-sm font-medium ml-4">My Order</p></NavLink>
                     {/* history */}
-                    <NavLink to="history" className="flex items-center py-4"><VscHistory size={21}
-                                                                                         className="color-auro_metal_saurus"/>
+                    <NavLink to="/history" className="flex items-center py-4"
+                             onClick={() => setStatusMenu(false)}><VscHistory size={21}
+                                                                              className="color-auro_metal_saurus"/>
                         <p className="text-gray-200 text-sm font-medium ml-4">History</p></NavLink>
                     {/* complaint */}
-                    <NavLink to="complaint" className="flex items-center py-4"><AiOutlineMessage size={21}
-                                                                                                 className="color-auro_metal_saurus"/>
+                    <NavLink to="/complaint" className="flex items-center py-4"
+                             onClick={() => setStatusMenu(false)}><AiOutlineMessage size={21}
+                                                                                    className="color-auro_metal_saurus"/>
                         <p className="text-gray-200 text-sm font-medium ml-4">Complaint</p></NavLink>
                     {/* privacy policy */}
-                    <NavLink to="privacy-policy" className="flex items-center py-4"><AiOutlineFileText size={21}
-                                                                                                       className="color-auro_metal_saurus"/>
+                    <NavLink to="/privacy-policy" className="flex items-center py-4"
+                             onClick={() => setStatusMenu(false)}><AiOutlineFileText size={21}
+                                                                                     className="color-auro_metal_saurus"/>
                         <p className="text-gray-200 text-sm font-medium ml-4">Privacy Policy</p></NavLink>
                 </div>
                 {/* footer menu */}
                 <div className="absolute bottom-16">
                     {/* user logout */}
-                    <Link to="/logout" className="flex items-center py-4"><CiLogout size={21}
-                                                                                   className="color-auro_metal_saurus"/>
+                    <Link to="/logout" className="flex items-center py-4" onClick={() => setStatusMenu(false)}><CiLogout
+                        size={21}
+                        className="color-auro_metal_saurus"/>
                         <p className="text-gray-200 text-sm font-medium ml-4">Log-out</p></Link>
                 </div>
             </div>
