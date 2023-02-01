@@ -11,6 +11,7 @@ import Payment from "./components/pages/payment";
 import DeliveryInformation from "./components/pages/delivery-information";
 import Profile from "./components/pages/profile";
 import History from "./components/pages/history";
+import Favorites from "./components/pages/favorites";
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
             <Route path='/delivery-information' element={<DeliveryInformation/>}/>
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/history' element={<History/>}/>
+            <Route path='/favorites' element={<Favorites/>}/>
         </Routes>
     );
 }
