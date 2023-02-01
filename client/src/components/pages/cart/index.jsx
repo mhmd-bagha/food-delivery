@@ -1,6 +1,6 @@
 import Header from "./header";
 import CartItems from './cart-items'
-import Footer from "./footer";
+import TotalPriceNext from "../../ui/total-price-next";
 
 const Cart = () => {
     return (<>
@@ -14,7 +14,7 @@ const Cart = () => {
                 <CartItems/>
             </div>
             {/* total price and next top level */}
-            <Footer/>
+            <TotalPriceNext totalPrice='33,50' linkText='Next' linkUrl='payment'/>
         </section>
     </>)
 }
