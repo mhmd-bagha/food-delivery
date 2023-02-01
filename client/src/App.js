@@ -10,6 +10,7 @@ import ChangePassword from "./components/pages/change-password";
 import Payment from "./components/pages/payment";
 import DeliveryInformation from "./components/pages/delivery-information";
 import Profile from "./components/pages/profile";
+import History from "./components/pages/history";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
             <Route path='/payment' element={<Payment/>}/>
             <Route path='/delivery-information' element={<DeliveryInformation/>}/>
             <Route path='/profile' element={<Profile/>}/>
+            <Route path='/history' element={<History/>}/>
         </Routes>
     );
 }
