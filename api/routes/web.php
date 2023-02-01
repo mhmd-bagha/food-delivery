@@ -5,6 +5,7 @@ use \App\Http\Controllers\FoodController;
 use App\Http\Controllers\FoodCategoryController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\CartController;
+use \App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,9 @@ Route::prefix('cart')->group(function () {
     Route::post('/add', [CartController::class, 'addFood']);
     Route::post('/get', [CartController::class, 'getCart']);
     Route::delete('/delete/cart-id/{cart_id}', [CartController::class, 'deleteFood']);
+});
+// add/get favorite
+Route::prefix('favorites')->group(function () {
+    Route::post('/', [FavoriteController::class, 'getFavorite']);
+    Route::post('/add', [FavoriteController::class, 'addFavorite']);
 });

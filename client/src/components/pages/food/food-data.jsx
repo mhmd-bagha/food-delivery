@@ -9,7 +9,7 @@ const FoodData = () => {
     return (
         <>
             {/* food data */}
-            <div className="mt-5 lg:mt-2 flex justify-center">
+            <div className="mt-2 flex justify-center">
                 <div>
                     {/* food name */}
                     <h3 className="text-white text-2xl font-medium text-center">Sake Roll</h3>

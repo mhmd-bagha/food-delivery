@@ -32,7 +32,7 @@ const FoodDescription = () => {
                         </div>
                     </div>
                     {/* description */}
-                    <div className="py-10">
+                    <div className="py-7">
                         <p className="text-xl text-white font-medium">Description</p>
                         <p className="mt-2 color-auro_metal_saurus">Lorem ipsum dolor sit amet, consectetur adipisicing
                             elit. Ab ad, adipisci aliquam corporis inventore ipsa, ipsum laudantium nisi pariatur
