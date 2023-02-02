@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   position: relative;
+  text-transform: capitalize;
 
   &.active {
     color: $white;
