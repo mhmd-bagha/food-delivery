@@ -22,7 +22,7 @@ class FoodController extends Controller
         echo response()->json($food)->getContent();
     }
 
-    public function getFood(Request $request, FoodModel $model)
+    public function getFood(FoodModel $model)
     {
         $foods = $model->all(); // get all foods
         ($foods) ? $this->message = ['data' => $foods, 'status' => 200] : $this->message = ['message' => 'An error has occurred', 'status' => 500];

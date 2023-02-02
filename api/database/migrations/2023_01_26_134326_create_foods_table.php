@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('food_image', 300);
             $table->string('food_information', 50);
             $table->string('food_description', 300);
+            $table->string('food_materials', 150);
             $table->string('food_price', 10);
             $table->bigInteger('category_id');
             $table->string('create_at', 20);
