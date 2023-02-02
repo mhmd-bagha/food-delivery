@@ -21,6 +21,7 @@ use \App\Http\Controllers\FavoriteController;
 Route::prefix('api/')->group(function () {
     // the routes api on food
     Route::prefix('food')->group(function () {
+        Route::post('/', [FoodController::class, 'getFood']);
         // get all foods from category
         Route::post('/category/{category}', [FoodController::class, 'foodsCategory']);
         // get all categories
