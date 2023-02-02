@@ -16,6 +16,6 @@ class FoodSeeder extends Seeder
      */
     public function run()
     {
-        FoodModel::create(['food_name' => Str::random(10), 'food_image' => 'https://w7.pngwing.com/pngs/588/319/png-transparent-sushi-doughnut-japanese-cuisine-sushi-food-recipe-green-tea-thumbnail.png', 'food_information' => json_encode(['cal' => 130, 'min' => '15-20', 'vote' => '6.9', 'g' => '450']), 'food_description' => Str::random(30), 'food_price' => '1450', 'category_id' => fake()->randomNumber(6)]);
+        FoodModel::create(['food_name' => 'sake roll', 'food_image' => 'https://www.freepnglogos.com/uploads/sushi-png/hosomaki-menu-planet-sushi-12.png', 'food_information' => json_encode(['cal' => 130, 'min' => '15-20', 'vote' => '6.9', 'g' => '450']), 'food_description' => Str::random(30), 'food_materials' => 'Kinoa, kani, avacoda', 'food_price' => '1410', 'category_id' => fake()->randomNumber(6)]);
     }
 }

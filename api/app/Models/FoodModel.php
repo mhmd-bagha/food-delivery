@@ -10,7 +10,7 @@ class FoodModel extends Model
     use HasFactory;
 
     protected $table = 'foods';
-    protected $fillable = ['food_name', 'food_image', 'food_information', 'food_description', 'food_price', 'category_id'];
+    protected $fillable = ['food_name', 'food_image', 'food_information', 'food_description', 'food_materials', 'food_price', 'category_id'];
     const CREATED_AT = 'create_at';
     const UPDATED_AT = 'update_at';
 

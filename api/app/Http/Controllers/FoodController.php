@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class FoodController extends Controller
 {
+    protected array $message;
+
     // get foods from category
     public function foodsCategory($category_id, FoodModel $model)
     {
@@ -18,5 +20,12 @@ class FoodController extends Controller
     {
         $food = FoodModel::findOrFail($food_id);
         echo response()->json($food)->getContent();
+    }
+
+    public function getFood(FoodModel $model)
+    {
+        $foods = $model->all(); // get all foods
+        ($foods) ? $this->message = ['data' => $foods, 'status' => 200] : $this->message = ['message' => 'An error has occurred', 'status' => 500];
+        echo response()->json($this->message)->getContent(); // call response
     }
 }
