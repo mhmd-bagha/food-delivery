@@ -5,7 +5,7 @@ const Food = () => {
     return (
         <>
             <div className="mt-8 pb-9">
-                <div className="flex overflow-x-auto gap-7">
+                <div className="grid grid-flow-col overflow-x-auto gap-7">
                     {/* food */}
                     <div className="min-w-max rounded-3xl bg_mirage px-2 py-5">
                         {/* image */}
