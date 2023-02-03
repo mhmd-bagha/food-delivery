@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FoodCategoryModel;
 use App\Models\FoodModel;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class FoodController extends Controller
 
     public function getFood(FoodModel $model)
     {
-        $foods = $model->all(); // get all foods
+        $foods = FoodModel::all(['id', 'food_name', 'food_price', 'food_image', 'food_materials']); // get all foods
         ($foods) ? $this->message = ['data' => $foods, 'status' => 200] : $this->message = ['message' => 'An error has occurred', 'status' => 500];
         echo response()->json($this->message)->getContent(); // call response
     }
