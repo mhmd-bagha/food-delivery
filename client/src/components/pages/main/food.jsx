@@ -7,7 +7,7 @@ import getFoods from "../../../api/food";
 const Food = ({getFoods, foods}) => {
 
     useEffect(() => {
-        return getFoods
+        getFoods()
     }, [])
 
     return (
