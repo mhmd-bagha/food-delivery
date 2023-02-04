@@ -1,7 +1,7 @@
 import {AiOutlineMinus, AiOutlinePlus} from "react-icons/ai";
 import {useState} from "react";
 
-const FoodData = () => {
+const FoodData = (food) => {
     const foodCountDefault = 1
     const [foodCount, setFoodCount] = useState(foodCountDefault)
     if (foodCount < foodCountDefault) setFoodCount(foodCountDefault)
@@ -12,10 +12,10 @@ const FoodData = () => {
             <div className="mt-2 flex justify-center">
                 <div>
                     {/* food name */}
-                    <h3 className="text-white text-2xl font-medium text-center">Sake Roll</h3>
+                    <h3 className="text-white text-2xl font-medium text-center">{food.food.food_name}</h3>
                     {/* food image */}
-                    <img src={require('../../../assets/images/food/sushi.png')} alt="sushi"
-                         className="w-70 h-auto"/>
+                    <img src={food.food.food_image} alt="sushi"
+                         className="w-1/2 h-auto mx-auto"/>
                     {/* food count */}
                     <div className="flex justify-center">
                         <div
