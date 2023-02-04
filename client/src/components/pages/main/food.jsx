@@ -15,7 +15,7 @@ const Food = ({getFoods, foods}) => {
             <div className="mt-5 pb-9">
                 <div className="grid grid-flow-col overflow-x-auto gap-7">
                     {/* food */}
-                    {foods.data && foods.data.map((food, id) => (
+                    {foods.foods && foods.foods.map((food, id) => (
                         <div className="min-w-max rounded-3xl bg_mirage px-2 py-5" key={id}>
                             {/* image */}
                             <img src={food.food_image} alt={food.food_name}
