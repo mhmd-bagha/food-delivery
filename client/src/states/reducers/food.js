@@ -10,11 +10,11 @@ const Food = (state = initialState, action) => {
         case START_API_FOOD:
             return {...state, loading: true}
         case SET_DATA_FOOD:
-            return {loading: false, foods: action.payload}
+            return {...state, loading: false, foods: action.payload}
         case SET_DATA_GET_FOOD:
-            return {loading: false, food: action.payload}
+            return {...state, loading: false, food: action.payload}
         case ERROR_API_FOOD:
-            return {loading: false, foods: action.payload}
+            return {...state, loading: false, foods: action.payload}
         default:
             return state
     }
