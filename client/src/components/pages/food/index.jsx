@@ -7,11 +7,11 @@ import {connect} from "react-redux";
 import {getFood} from "../../../api/food";
 import {useParams} from "react-router-dom";
 
-const Food = ({foods, getFood}) => {
-    const {id} = useParams(); // get param food id
+const Food = ({food, getFood}) => {
+    const {id: FoodId} = useParams(); // get param food id
 
     useEffect(() => {
-        getFood(id)
+        getFood(FoodId)
     }, [])
 
     return (<>
@@ -20,19 +20,19 @@ const Food = ({foods, getFood}) => {
                 {/* header */}
                 <Header/>
                 {/* food data */}
-                <FoodData food={foods.food}/>
+                <FoodData food={food.food}/>
             </div>
         </section>
         {/* food description */}
-        <FoodDescription food={foods.food}/>
+        <FoodDescription food={food.food}/>
         {/* food price and add to cart */}
-        <Footer food={foods.food}/>
+        <Footer food={food.food}/>
     </>)
 }
 
 const mapToStateProps = (state) => {
     return {
-        foods: state.foods
+        food: state.foods
     }
 }
 const mapToDispatchProps = (dispatch) => {

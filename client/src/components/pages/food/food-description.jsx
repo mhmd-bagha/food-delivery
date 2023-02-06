@@ -1,13 +1,12 @@
 import {FcAlarmClock} from "react-icons/fc";
 import {GiKitchenScale} from "react-icons/gi";
 
-const FoodDescription = (food) => {
-    const food_information = JSON.parse(food.food.food_information) // set json parse in food information
+const FoodDescription = ({food}) => {
+    const food_information = food && JSON.parse(food.food_information) // set json parse in food information
 
     return (
         <>
-            {/* food description */}
-            <section className="bg_mirage h-2/3 lg:h-1/3">
+            {food && <section className="bg_mirage h-2/3 lg:h-1/3">
                 <div className="bg_dark px-12 py-12 rounded-b-main shadow-md">
                     {/* icons data */}
                     <div className="flex justify-between items-center">
@@ -37,10 +36,10 @@ const FoodDescription = (food) => {
                     {/* description */}
                     <div className="py-7">
                         <p className="text-xl text-white font-medium">Description</p>
-                        <p className="mt-2 color-auro_metal_saurus">{food.food.food_description}</p>
+                        <p className="mt-2 color-auro_metal_saurus">{food.food_description}</p>
                     </div>
                 </div>
-            </section>
+            </section>}
         </>
     )
 }
