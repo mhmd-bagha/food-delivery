@@ -66,13 +66,14 @@ class CartController extends Controller
         switch ($cartFoods->exists()) {
             case true:
                 $totalPrice = 0; // default total price
+                $getFood = [];
                 $getCartFoods = $cartFoods->get();
-                // foreach for get total price
+                // foreach for get food and total price
                 foreach ($getCartFoods as $getCartFood):
-                    $foodsPrice = FoodModel::find($getCartFood->food_id)->food_price;
-                    $totalPrice += $foodsPrice;
+                    $getFood = FoodModel::find($getCartFood->food_id);
+                    $totalPrice += $getFood->food_price;
                 endforeach;
-                $this->messages = ['data' => $getCartFoods, 'totalPrice' => $totalPrice, 'status' => 200]; // return data cart
+                $this->messages = ['data' => $getFood, 'totalPrice' => $totalPrice, 'status' => 200]; // return data cart
                 break;
             default:
                 $this->messages = ['message' => 'The empty cart', 'status' => 500]; // return response empty cart
