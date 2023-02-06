@@ -1,0 +1,5 @@
+@import 'src/styles/styles';
+
+.bg_history:nth-child(odd) {
+  background: $mirage !important;
+}

@@ -1,45 +1,45 @@
 import {FcAlarmClock} from "react-icons/fc";
 import {GiKitchenScale} from "react-icons/gi";
 
-const FoodDescription = () => {
+const FoodDescription = ({food}) => {
+    const food_information = food && JSON.parse(food.food_information) // set json parse in food information
+
     return (
         <>
-            {/* food description */}
-            <section className="bg_mirage h-2/3 lg:h-1/3">
+            {food && <section className="bg_mirage h-2/3 lg:h-1/3">
                 <div className="bg_dark px-12 py-12 rounded-b-main shadow-md">
                     {/* icons data */}
                     <div className="flex justify-between items-center">
                         {/* fire */}
                         <div>
-                            <img src={require('../../../assets/images/icons/fire.png')} alt="fire" className="w-4 h-auto"/>
-                            <p className="text-white text-sm mt-1">130 cal</p>
+                            <img src={require('../../../assets/images/icons/fire.png')} alt="fire"
+                                 className="w-4 h-auto"/>
+                            <p className="text-white text-sm mt-1">{food_information.cal} cal</p>
                         </div>
                         {/* clock */}
                         <div>
                             <FcAlarmClock size={23}/>
-                            <p className="text-white text-sm mt-1">15-20 min</p>
+                            <p className="text-white text-sm mt-1">{food_information.min} min</p>
                         </div>
                         {/* vote */}
                         <div>
                             <img src={require('../../../assets/images/icons/star-struck.png')} alt="fire"
                                  className="w-7 h-auto"/>
-                            <p className="text-white text-sm mt-1">4.9 vote</p>
+                            <p className="text-white text-sm mt-1">{food_information.vote} vote</p>
                         </div>
                         {/* scale */}
                         <div>
                             <GiKitchenScale size={23} className="text-purple-500"/>
-                            <p className="text-white text-sm mt-1">350g</p>
+                            <p className="text-white text-sm mt-1">{food_information.g} g</p>
                         </div>
                     </div>
                     {/* description */}
-                    <div className="py-10">
+                    <div className="py-7">
                         <p className="text-xl text-white font-medium">Description</p>
-                        <p className="mt-2 color-auro_metal_saurus">Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Ab ad, adipisci aliquam corporis inventore ipsa, ipsum laudantium nisi pariatur
-                            perferendis quidem.</p>
+                        <p className="mt-2 color-auro_metal_saurus">{food.food_description}</p>
                     </div>
                 </div>
-            </section>
+            </section>}
         </>
     )
 }
