@@ -6,8 +6,10 @@ import {useEffect} from "react";
 import {connect} from "react-redux";
 import {getFood} from "../../../api/food";
 import {useParams} from "react-router-dom";
+import {addFood} from "../../../api/cart";
+import {decrementCountFood, incrementCountFood} from "../../../states/actions/food";
 
-const Food = ({food, getFood}) => {
+const Food = ({food, getFood, addToCart, incrementFoodCount, decrementFoodCount}) => {
     const {id: FoodId} = useParams(); // get param food id
 
     useEffect(() => {
@@ -20,13 +22,14 @@ const Food = ({food, getFood}) => {
                 {/* header */}
                 <Header/>
                 {/* food data */}
-                <FoodData food={food.food}/>
+                <FoodData food={food.food} minusFoodCount={decrementFoodCount}
+                          plusFoodCount={incrementFoodCount} foodCount={food.food_count}/>
             </div>
         </section>
         {/* food description */}
         <FoodDescription food={food.food}/>
         {/* food price and add to cart */}
-        <Footer food={food.food}/>
+        <Footer food={food.food} addFoodCart={addToCart} food_id={FoodId}/>
     </>)
 }
 
@@ -37,7 +40,10 @@ const mapToStateProps = (state) => {
 }
 const mapToDispatchProps = (dispatch) => {
     return {
-        getFood: (FoodId) => getFood(FoodId, dispatch)
+        getFood: (FoodId) => getFood(FoodId, dispatch),
+        incrementFoodCount: () => dispatch(incrementCountFood()),
+        decrementFoodCount: () => dispatch(decrementCountFood()),
+        addToCart: (data) => addFood(data, dispatch)
     }
 }
 
