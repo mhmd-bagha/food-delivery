@@ -70,7 +70,7 @@ class CartController extends Controller
 
                 foreach ($cartFoods->get() as $cartFood):
                     $getFood = FoodModel::find($cartFood->food_id);
-                    $totalPrice += $getFood->food_price;
+                    $totalPrice += $getFood->food_price * $cartFood->food_count;
                     Arr::add($getFood, 'food_count', $cartFood->food_count);
                     Arr::add($getFood, 'cart_id', $cartFood->id);
                     $getFoods[] = $getFood;
