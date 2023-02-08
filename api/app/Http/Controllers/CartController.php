@@ -72,6 +72,7 @@ class CartController extends Controller
                     $getFood = FoodModel::find($cartFood->id);
                     $totalPrice += $getFood->food_price;
                     $getFoods[] = Arr::add($getFood, 'food_count', $cartFood->food_count);
+                    $getFoods[] = Arr::add($getFood, 'cart_id', $cartFood->id);
                 endforeach;
 
                 $this->messages = ['data' => $getFoods, 'totalPrice' => $totalPrice, 'status' => 200]; // return data cart
