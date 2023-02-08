@@ -1,12 +1,11 @@
 import {useNavigate} from "react-router-dom";
 
-const Footer = ({food, addFoodCart, food_id}) => {
+const Footer = ({food, addFoodCart, food_id, food_count}) => {
     const navigate = useNavigate();
     // add to cart food
     const AddToCart = () => {
-        let data = {user_id: 5, food_id, food_count: 3};
-        addFoodCart(data)
-        // return navigate("/cart")
+        let data = {user_id: 5, food_id, food_count};
+        addFoodCart(data) ? navigate("/cart") : alert('not added food to cart')
     }
     return (
         <>

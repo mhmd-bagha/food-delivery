@@ -29,7 +29,7 @@ const Food = ({food, getFood, addToCart, incrementFoodCount, decrementFoodCount}
         {/* food description */}
         <FoodDescription food={food.food}/>
         {/* food price and add to cart */}
-        <Footer food={food.food} addFoodCart={addToCart} food_id={FoodId}/>
+        <Footer food={food.food} addFoodCart={addToCart} food_id={FoodId} food_count={food.food_count}/>
     </>)
 }
 
