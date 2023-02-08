@@ -71,8 +71,9 @@ class CartController extends Controller
                 foreach ($cartFoods->get() as $cartFoodKey => $cartFood):
                     $getFood = FoodModel::find($cartFood->id);
                     $totalPrice += $getFood->food_price;
-                    $getFoods[] = Arr::add($getFood, 'food_count', $cartFood->food_count);
-                    $getFoods[] = Arr::add($getFood, 'cart_id', $cartFood->id);
+                    Arr::add($getFood, 'food_count', $cartFood->food_count);
+                    Arr::add($getFood, 'cart_id', $cartFood->id);
+                    $getFoods[] = $getFood;
                 endforeach;
 
                 $this->messages = ['data' => $getFoods, 'totalPrice' => $totalPrice, 'status' => 200]; // return data cart
