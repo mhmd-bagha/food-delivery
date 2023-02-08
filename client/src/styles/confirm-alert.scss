@@ -1,0 +1,30 @@
+@import 'styles';
+
+.react-confirm-alert-overlay {
+  background: rgba(0, 0, 0, 0.325);
+
+  .confirm_alert {
+    background: $gunmetal;
+    height: 12rem;
+    width: 100%;
+    padding: 2rem 3rem 2rem 3rem;
+    border-radius: .5rem;
+
+
+    & button {
+      padding: .5rem 1.2rem .5rem 1.2rem;
+      margin: 0 .4rem 0 0;
+      border-radius: $rounded_base;
+    }
+
+    .accept_confirm {
+      background: $mirage !important;
+      color: $white;
+    }
+
+    .cancel_confirm {
+      background: $mirage !important;
+      color: $auro_metal_saurus;
+    }
+  }
+}
