@@ -68,8 +68,8 @@ class CartController extends Controller
             case true:
                 $totalPrice = 0;
 
-                foreach ($cartFoods->get() as $cartFoodKey => $cartFood):
-                    $getFood = FoodModel::find($cartFood->id);
+                foreach ($cartFoods->get() as $cartFood):
+                    $getFood = FoodModel::find($cartFood->food_id);
                     $totalPrice += $getFood->food_price;
                     Arr::add($getFood, 'food_count', $cartFood->food_count);
                     Arr::add($getFood, 'cart_id', $cartFood->id);
@@ -79,7 +79,7 @@ class CartController extends Controller
                 $this->messages = ['data' => $getFoods, 'totalPrice' => $totalPrice, 'status' => 200]; // return data cart
                 break;
             default:
-                $this->messages = ['message' => 'The empty cart', 'status' => 500]; // return response empty cart
+                $this->messages = ['message' => 'The empty cart', 'status' => 200]; // return response empty cart
                 break;
         }
         echo response()->json($this->messages)->getContent(); // call response
