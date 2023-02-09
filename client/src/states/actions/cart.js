@@ -15,8 +15,9 @@ export const addFoodCart = (message) => ({
     message
 })
 
-export const deleteFoodCart = (message) => ({
+export const deleteFoodCart = (cartId, message) => ({
     type: DELETE_FOOD,
+    payload: cartId,
     message
 })
 

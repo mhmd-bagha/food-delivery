@@ -25,7 +25,7 @@ export const deleteFood = async (cartId, dispatch) => {
     dispatch(startApi())
     const res = await axiosInstance.delete('/cart/delete/cart-id/' + cartId)
     try {
-        dispatch(deleteFoodCart(res.data.message))
+        dispatch(deleteFoodCart(cartId, res.data.message))
     } catch (err) {
         dispatch(errorApi(err.data))
     }

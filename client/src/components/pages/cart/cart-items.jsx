@@ -1,17 +1,18 @@
 import {IoCloseSharp} from "react-icons/io5";
 import {Link} from "react-router-dom";
+import AlertConfirm from "../../tools/alert-confirm";
 
 const CartItems = ({foods, delete_food}) => {
 
-    const deleteFoodCart = () => {
-        
+    const deleteFoodCart = (cartId) => {
+        AlertConfirm(delete_food, cartId)
     }
 
     return (
         <>
             <section
-                className="grid grid-flow-row lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-20 mt-10 overflow-y-auto h-5/6">
-                {foods && foods.map((food, index) => (
+                className="lg:grid grid-flow-row lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-20 mt-10 overflow-y-auto h-5/6">
+                {foods ? foods.map((food, index) => (
                     <div className="flex items-center py-4" key={index}>
                         {/* image */}
                         <Link to={'/food/' + food.id}
@@ -35,12 +36,12 @@ const CartItems = ({foods, delete_food}) => {
                             </div>
                             {/* button delete food from cart */}
                             <button type="button" className="p-1.5 bg_gunmetal rounded-full"
-                                    onClick={deleteFoodCart}><IoCloseSharp size={17}
-                                                                                            className="color-auro_metal_saurus"/>
+                                    onClick={() => deleteFoodCart(food.cart_id)}><IoCloseSharp size={17}
+                                                                                               className="color-auro_metal_saurus"/>
                             </button>
                         </div>
                     </div>
-                ))}
+                )) : undefined}
             </section>
         </>
     )

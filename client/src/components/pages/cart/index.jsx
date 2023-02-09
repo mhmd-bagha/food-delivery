@@ -4,6 +4,7 @@ import TotalPriceNext from "../../ui/total-price-next";
 import {deleteFood, getCart} from "../../../api/cart";
 import {connect} from "react-redux";
 import {useEffect} from "react";
+import CartEmpty from "./cart-empty";
 
 const Cart = ({cart, getCart, deleteFoodCart, user_id}) => {
 
@@ -20,10 +21,10 @@ const Cart = ({cart, getCart, deleteFoodCart, user_id}) => {
                     {/* header */}
                     <Header/>
                     {/* items cart */}
-                    <CartItems foods={cart.cart} delete_food={deleteFoodCart}/>
+                    {cart.cart ? <CartItems foods={cart.cart} delete_food={deleteFoodCart}/> : <CartEmpty/>}
                 </div>
                 {/* total price and next top level */}
-                <TotalPriceNext totalPrice={cart.total_price} linkText='Next' linkUrl='payment'/>
+                {cart.cart ? <TotalPriceNext totalPrice={cart.total_price} linkText='Next' linkUrl='payment'/> : null}
             </section>
         </>
     )
