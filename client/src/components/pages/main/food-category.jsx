@@ -1,12 +1,10 @@
 import {NavLink} from "react-router-dom";
-import {connect} from 'react-redux';
-import getFoodCategory from "../../../api/food-category";
 import {useEffect} from "react";
 
 const FoodCategory = ({getCategoryFood, foodCategory}) => {
 
     useEffect(() => {
-        return getCategoryFood
+        getCategoryFood()
     }, [])
 
     return (<>
@@ -19,15 +17,4 @@ const FoodCategory = ({getCategoryFood, foodCategory}) => {
     </>)
 }
 
-const mapToStateProps = (state) => {
-    return {
-        foodCategory: state.foodCategory
-    }
-}
-const mapToDispatchProps = (dispatch) => {
-    return {
-        getCategoryFood: () => getFoodCategory(dispatch)
-    }
-}
-
-export default connect(mapToStateProps, mapToDispatchProps)(FoodCategory)
+export default FoodCategory
