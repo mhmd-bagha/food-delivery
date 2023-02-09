@@ -6,6 +6,7 @@ use App\Models\CartModel;
 use App\Models\FoodModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
@@ -65,17 +66,20 @@ class CartController extends Controller
         $cartFoods = $model->where('user_id', $user_id)->where('status', self::WAIT_CART_STATUS); // get cart isn't empty
         switch ($cartFoods->exists()) {
             case true:
-                $totalPrice = 0; // default total price
-                $getCartFoods = $cartFoods->get();
-                // foreach for get total price
-                foreach ($getCartFoods as $getCartFood):
-                    $foodsPrice = FoodModel::find($getCartFood->food_id)->food_price;
-                    $totalPrice += $foodsPrice;
+                $totalPrice = 0;
+
+                foreach ($cartFoods->get() as $cartFood):
+                    $getFood = FoodModel::find($cartFood->food_id);
+                    $totalPrice += $getFood->food_price * $cartFood->food_count;
+                    Arr::add($getFood, 'food_count', $cartFood->food_count);
+                    Arr::add($getFood, 'cart_id', $cartFood->id);
+                    $getFoods[] = $getFood;
                 endforeach;
-                $this->messages = ['data' => $getCartFoods, 'totalPrice' => $totalPrice, 'status' => 200]; // return data cart
+
+                $this->messages = ['data' => $getFoods, 'totalPrice' => $totalPrice, 'status' => 200]; // return data cart
                 break;
             default:
-                $this->messages = ['message' => 'The empty cart', 'status' => 500]; // return response empty cart
+                $this->messages = ['message' => 'The empty cart', 'status' => 200]; // return response empty cart
                 break;
         }
         echo response()->json($this->messages)->getContent(); // call response
