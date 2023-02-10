@@ -17,7 +17,7 @@ const CartItems = ({foods, delete_food}) => {
                         {/* image */}
                         <Link to={'/food/' + food.id}
                               className="border border-gray-700 rounded-3xl p-2 mr-5 lg:mr-8 bg_mirage">
-                            <img src={food.food_image} alt={food.food_name} className="h-auto w-40"/>
+                            <img src={food.food_image} alt={food.food_name} className="h-20 w-40"/>
                         </Link>
                         {/* food number */}
                         <p className="color-auro_metal_saurus font-bold mr-5 lg:mr-8">{food.food_count}x</p>

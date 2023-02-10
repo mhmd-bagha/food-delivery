@@ -1,8 +1,6 @@
 import {IoBagHandleOutline} from "react-icons/io5";
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
 import {useEffect} from "react";
-import getFoods from "../../../api/food";
 
 const Food = ({getFoods, foods}) => {
 
@@ -46,15 +44,4 @@ const Food = ({getFoods, foods}) => {
     )
 }
 
-const mapToStateProps = (state) => {
-    return {
-        foods: state.foods
-    }
-}
-const mapToDispatchProps = (dispatch) => {
-    return {
-        getFoods: () => getFoods(dispatch)
-    }
-}
-
-export default connect(mapToStateProps, mapToDispatchProps)(Food)
+export default Food
