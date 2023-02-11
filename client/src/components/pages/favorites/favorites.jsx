@@ -14,7 +14,7 @@ const FavoritesView = ({favorites, deleteFavorite}) => {
                             {/* image */}
                             <Link to={'/food/' + favorite.id}>
                                 <img src={favorite.food_image} alt={favorite.food_name}
-                                     className="px-3.5 py-2 mx-auto w-52 h-auto rounded-3xl"/>
+                                     className="px-3.5 py-2 mx-auto w-40 h-40 rounded-3xl"/>
                             </Link>
                             {/* information food */}
                             <div className="px-3 mt-1.5">
