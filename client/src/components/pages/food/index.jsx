@@ -10,7 +10,7 @@ import {addFood} from "../../../api/cart";
 import {decrementCountFood, incrementCountFood} from "../../../states/actions/food";
 import {addFavorite} from "../../../api/favorite";
 
-const Food = ({food, getFood, addToCart, incrementFoodCount, decrementFoodCount, addFavorite}) => {
+const Food = ({food, getFood, addToCart, incrementFoodCount, decrementFoodCount, addFavorite, favorite}) => {
     const {id: FoodId} = useParams(); // get param food id
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const Food = ({food, getFood, addToCart, incrementFoodCount, decrementFoodCount,
         <section className="bg_dark">
             <div className="bg_mirage px-12 pt-8 rounded-b-main">
                 {/* header */}
-                <Header addFavorite={addFavorite} foodId={FoodId} userId={5}/>
+                <Header addFavorite={addFavorite} foodId={FoodId} userId={5} favorite={favorite.favorite}/>
                 {/* food data */}
                 <FoodData food={food.food} minusFoodCount={decrementFoodCount}
                           plusFoodCount={incrementFoodCount} foodCount={food.food_count}/>
@@ -36,7 +36,8 @@ const Food = ({food, getFood, addToCart, incrementFoodCount, decrementFoodCount,
 
 const mapToStateProps = (state) => {
     return {
-        food: state.foods
+        food: state.foods,
+        favorite: state.favorite
     }
 }
 const mapToDispatchProps = (dispatch) => {
