@@ -48,7 +48,7 @@ class FavoriteController extends Controller
         echo response()->json($this->messages)->getContent(); // call response
     }
 
-    public function deletefavorite(int $favoriteId, FavoriteModel $model)
+    public function deleteFavorite(int $favoriteId, FavoriteModel $model)
     {
         // find favorite by id
         $favorite = $model->find($favoriteId);
