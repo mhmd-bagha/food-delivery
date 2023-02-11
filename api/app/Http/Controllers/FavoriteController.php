@@ -39,13 +39,15 @@ class FavoriteController extends Controller
             echo response()->json(['errors' => 'Submited data is incomplated', 'status' => 500])->getContent();
             exit();
         }
-        $user_id = $user_id->validated();
+        $user_id = $user_id->validated()['user_id'];
         $getFavorite = $model->where('user_id', $user_id);
         if ($getFavorite->exists()) {
             // get food
             foreach ($getFavorite->get() as $favorite) {
                 $getFood = FoodModel::find($favorite->food_id);
-                $getFoods[] = Arr::add($getFood, 'favorite_id', $favorite->id);
+                Arr::add($getFood, 'favorite_id', $favorite->id); // add favorite id to api
+                Arr::add($getFood, 'user_id', $user_id); // add user id to api
+                $getFoods[] = $getFood;
             }
             $this->messages = ['data' => $getFoods, 'status' => 200];
         } else $this->messages = ['message' => 'The food not exist favorite', 'status' => 500];
