@@ -47,4 +47,18 @@ class FavoriteController extends Controller
         } else $this->messages = ['message' => 'The food not exist favorite', 'status' => 500];
         echo response()->json($this->messages)->getContent(); // call response
     }
+
+    public function deletefavorite(int $favoriteId, FavoriteModel $model)
+    {
+        // find favorite by id
+        $favorite = $model->find($favoriteId);
+        // check exist favorite
+        if (!$favorite) {
+            echo response()->json(['message' => "doesn't exist food favorite", 'status' => 500])->getContent();
+            exit();
+        }
+        // delete favorite and return message successful delete/error delete
+        ($favorite->delete()) ? $this->messages = ['message' => 'food favorite deleted successful', 'status' => 200] : $this->messages = ['message' => 'An error has occurred', 'status' => 500];
+        echo response()->json($this->messages)->getContent(); // call response
+    }
 }
