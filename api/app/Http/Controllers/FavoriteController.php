@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FavoriteModel;
 use App\Models\FoodModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 
 class FavoriteController extends Controller
@@ -42,8 +43,11 @@ class FavoriteController extends Controller
         $getFavorite = $model->where('user_id', $user_id);
         if ($getFavorite->exists()) {
             // get food
-            foreach ($getFavorite->get() as $favorite) $getFood[] = FoodModel::find($favorite->food_id);
-            $this->messages = ['data' => $getFood, 'status' => 200];
+            foreach ($getFavorite->get() as $favorite) {
+                $getFood = FoodModel::find($favorite->food_id);
+                $getFoods[] = Arr::add($getFood, 'favorite_id', $favorite->id);
+            }
+            $this->messages = ['data' => $getFoods, 'status' => 200];
         } else $this->messages = ['message' => 'The food not exist favorite', 'status' => 500];
         echo response()->json($this->messages)->getContent(); // call response
     }
