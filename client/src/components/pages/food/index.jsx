@@ -4,10 +4,9 @@ import FoodDescription from "./food-description";
 import Footer from "./footer";
 import {useEffect} from "react";
 import {connect} from "react-redux";
-import {getFood} from "../../../api/food";
 import {useParams} from "react-router-dom";
 import {addFood} from "../../../api/cart";
-import {decrementCountFood, incrementCountFood} from "../../../states/actions/food";
+import {decrementCountFood, GetFood, incrementCountFood} from "../../../states/actions/food";
 import {addFavorite} from "../../../api/favorite";
 
 const Food = ({food, getFood, addToCart, incrementFoodCount, decrementFoodCount, addFavorite, favorite}) => {
@@ -42,7 +41,7 @@ const mapToStateProps = (state) => {
 }
 const mapToDispatchProps = (dispatch) => {
     return {
-        getFood: (FoodId) => getFood(FoodId, dispatch),
+        getFood: (FoodId) => dispatch(GetFood(FoodId)),
         incrementFoodCount: () => dispatch(incrementCountFood()),
         decrementFoodCount: () => dispatch(decrementCountFood()),
         addToCart: (data) => addFood(data, dispatch),
