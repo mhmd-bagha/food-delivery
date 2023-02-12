@@ -29,7 +29,7 @@ const Food = (state = initialState, action) => {
             if (state.food_count === 1) return {...state, food_count: 1} // if the food count lower 1, this count equal 1
             return {...state, food_count: state.food_count - 1}
         case SEARCH_FOOD:
-            let search_food = state.foods.filter(({food_name, food_materials}) => food_name.includes(action.payload) || food_materials.includes(action.payload))
+            let search_food = state.foods.filter(({food_name, food_materials, category_id}) => food_name.includes(action.payload) || food_materials.includes(action.payload) || category_id === action.payload)
             return {...state, foods: (search_food.length !== 0) && search_food}
         case ERROR_API_FOOD:
             return {...state, loading: false, foods: action.payload}

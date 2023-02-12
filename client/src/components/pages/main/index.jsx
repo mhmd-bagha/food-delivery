@@ -15,8 +15,10 @@ const Index = ({foodCategory, getCategoryFood, foods, getFoods, searchFood, getF
             <section className="bg_mirage h-full">
                 <section className="px-12 md:pb-20 bg_dark relative z-10 rounded-b-main shadow-md">
                     <Header/>
-                    <SearchBar foods={foods} search={searchFood} getFoodsCache={getFoodsCache} foods_cache={foods.foods_cache}/>
-                    <FoodCategory foodCategory={foodCategory} getCategoryFood={getCategoryFood}/>
+                    <SearchBar foods={foods} search={searchFood} getFoodsCache={getFoodsCache}
+                               foods_cache={foods.foods_cache}/>
+                    <FoodCategory foodCategory={foodCategory} getCategoryFood={getCategoryFood} getFood={searchFood} setFoodsCache={getFoodsCache}
+                                  foods_cache={foods.foods_cache}/>
                     <Food foods={foods} getFoods={getFoods}/>
                 </section>
                 <BottomNavigation/>

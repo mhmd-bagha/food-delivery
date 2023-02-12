@@ -17,7 +17,7 @@ function App() {
     return (
         <Routes>
             <Route path='/' element={<Index/>} index/>
-            <Route path='category/:category' element={<Index/>}/>
+            <Route path='category/:categoryName/:categoryId' element={<Index/>}/>
             <Route path='/food/:id' element={<Food/>}/>
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/notifications' element={<Notifications/>}/>
