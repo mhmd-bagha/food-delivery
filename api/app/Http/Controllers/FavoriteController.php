@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FavoriteModel;
 use App\Models\FoodModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 
 class FavoriteController extends Controller
@@ -38,13 +39,32 @@ class FavoriteController extends Controller
             echo response()->json(['errors' => 'Submited data is incomplated', 'status' => 500])->getContent();
             exit();
         }
-        $user_id = $user_id->validated();
+        $user_id = $user_id->validated()['user_id'];
         $getFavorite = $model->where('user_id', $user_id);
         if ($getFavorite->exists()) {
             // get food
-            foreach ($getFavorite->get() as $favorite) $getFood[] = FoodModel::find($favorite->food_id);
-            $this->messages = ['data' => $getFood, 'status' => 200];
+            foreach ($getFavorite->get() as $favorite) {
+                $getFood = FoodModel::find($favorite->food_id);
+                Arr::add($getFood, 'favorite_id', $favorite->id); // add favorite id to api
+                Arr::add($getFood, 'user_id', $user_id); // add user id to api
+                $getFoods[] = $getFood;
+            }
+            $this->messages = ['data' => $getFoods, 'status' => 200];
         } else $this->messages = ['message' => 'The food not exist favorite', 'status' => 500];
+        echo response()->json($this->messages)->getContent(); // call response
+    }
+
+    public function deleteFavorite(int $favoriteId, FavoriteModel $model)
+    {
+        // find favorite by id
+        $favorite = $model->find($favoriteId);
+        // check exist favorite
+        if (!$favorite) {
+            echo response()->json(['message' => "doesn't exist food favorite", 'status' => 500])->getContent();
+            exit();
+        }
+        // delete favorite and return message successful delete/error delete
+        ($favorite->delete()) ? $this->messages = ['message' => 'food favorite deleted successful', 'status' => 200] : $this->messages = ['message' => 'An error has occurred', 'status' => 500];
         echo response()->json($this->messages)->getContent(); // call response
     }
 }
