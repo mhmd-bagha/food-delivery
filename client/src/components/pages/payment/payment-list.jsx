@@ -10,7 +10,7 @@ const PaymentList = () => {
         })
         var getRadio = document.getElementById(element) // get id from element
         getRadio.classList.add('bg-white') // change bg to white
-    })
+    }, [element])
     return (
         <>
             {/* payment select list */}
