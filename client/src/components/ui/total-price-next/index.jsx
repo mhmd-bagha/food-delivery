@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import priceFormat from "../../tools/price-format";
 
 const TotalPriceNext = ({linkText, linkUrl, totalPrice}) => {
     return (
@@ -8,7 +9,7 @@ const TotalPriceNext = ({linkText, linkUrl, totalPrice}) => {
                 {/* total price */}
                 <div>
                     <p className="text-sm text-gray-400">Total Price</p>
-                    <p className="text-2xl font-bold text-gray-100">${totalPrice}</p>
+                    <p className="text-2xl font-bold text-gray-100">${priceFormat(totalPrice)}</p>
                 </div>
                 {/* next to top level */}
                 <Link to={`/` + linkUrl}
