@@ -25,7 +25,7 @@ class FoodController extends Controller
 
     public function getFood(FoodModel $model)
     {
-        $foods = FoodModel::all(['id', 'food_name', 'food_price', 'food_image', 'food_materials']); // get all foods
+        $foods = FoodModel::all(); // get all foods
         ($foods) ? $this->message = ['data' => $foods, 'status' => 200] : $this->message = ['message' => 'An error has occurred', 'status' => 500];
         echo response()->json($this->message)->getContent(); // call response
     }
