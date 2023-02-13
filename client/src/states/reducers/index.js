@@ -5,6 +5,7 @@ import FoodCategory from "./food-category";
 import Food from "./food";
 import Cart from "./cart";
 import Favorite from "./favorite";
+import Payment from "./payment";
 
 export default combineReducers({
     deliveryInformation: deliveryInformation,
@@ -12,5 +13,6 @@ export default combineReducers({
     foodCategory: FoodCategory,
     foods: Food,
     cart: Cart,
-    favorite: Favorite
+    favorite: Favorite,
+    payment: Payment
 })
