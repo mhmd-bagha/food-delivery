@@ -1,36 +1,26 @@
-import {Route, Routes} from "react-router-dom";
-import Index from "./components/pages/main";
+import {Routes} from "react-router-dom";
 import './styles/index.css'
-import Food from "./components/pages/food";
-import Cart from "./components/pages/cart";
-import Notifications from "./components/pages/notifications";
-import Login from "./components/pages/login";
-import ForgotPassword from "./components/pages/forgot-password";
-import ChangePassword from "./components/pages/change-password";
-import Payment from "./components/pages/payment";
-import DeliveryInformation from "./components/pages/delivery-information";
-import Profile from "./components/pages/profile";
-import History from "./components/pages/history";
-import Favorites from "./components/pages/favorites";
+import {connect} from "react-redux";
+import Protected from "./routes/protected";
+import {Fragment} from "react";
+import Public from "./routes/public";
 
-function App() {
+function App({user}) {
+
     return (
-        <Routes>
-            <Route path='/' element={<Index/>} index/>
-            <Route path='category/:categoryName/:categoryId' element={<Index/>}/>
-            <Route path='/food/:id' element={<Food/>}/>
-            <Route path='/cart' element={<Cart/>}/>
-            <Route path='/notifications' element={<Notifications/>}/>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/forgot-password' element={<ForgotPassword/>}/>
-            <Route path='/change-password' element={<ChangePassword/>}/>
-            <Route path='/payment' element={<Payment/>}/>
-            <Route path='/delivery-information' element={<DeliveryInformation/>}/>
-            <Route path='/profile' element={<Profile/>}/>
-            <Route path='/history' element={<History/>}/>
-            <Route path='/favorites' element={<Favorites/>}/>
-        </Routes>
+        <Fragment>
+            <Routes>
+                {Public()}
+                {Protected(user)}
+            </Routes>
+        </Fragment>
     );
 }
 
-export default App;
+const mapToStateProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapToStateProps, null)(App)
