@@ -44,12 +44,7 @@ class UserController extends Controller
             $this->message = ['errors' => $data->errors(), 'status' => 500]; // create an array for errors
             echo response()->json($this->message)->getContent(); // call error
         } else {
-
-            $data = $data->validated();
-            // explode name user with space
-            $full_name_split_space = explode(' ', $data['full_name']);
-
-            $data = array_merge($data, ['password' => Hash::make($request->input('password')), 'ip' => $request->ip(), 'first_name' => $full_name_split_space[0], 'last_name' => $full_name_split_space[1]]); // update data password and ip address
+            $data = array_merge($data->validated(), ['password' => Hash::make($request->input('password')), 'ip' => $request->ip()]); // update data password and ip address
             // signup user
             ($model->signup($data)) ? $this->message = ['message' => 'This is successful signup', 'status' => 201, 'callback' => $data['email']] : $this->message = ['message' => 'This is unsuccessful signup', 'status' => 500, 'callback' => $data['email']];
             echo response()->json($this->message)->getContent(); // call messages
