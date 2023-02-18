@@ -9,12 +9,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
     protected $message = [];
 
-    public function login(UserModel $model, Request $request)
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+    }
+
+    public function login(Request $request)
     {
         $data = Validator::make($request->post(), [
             'email' => 'required|email:dns,filter',
@@ -22,14 +28,13 @@ class UserController extends Controller
         ]);
         // the check exist error then call error/login
         if ($data->failed()) {
-            $this->message = ['errors' => $data->errors(), 'status' => 500]; // create an array for errors
-            echo response()->json($this->message)->getContent(); // call error
-        } else {
-            $data = array_merge($data->validated(), ['password' => Hash::make($request->input('password'))]); // merge hash password the old password
-            // check the exists user
-            (Auth::attempt($data)) ? $this->message = ['message' => 'This is successful login', 'status' => 200, 'callback' => $data['email']] : $this->message = ['message' => 'This is user not found', 'status' => 500, 'callback' => $data['email']];
-            echo response()->json($this->message)->getContent();
+            echo response()->json(['errors' => $data->errors(), 'status' => 500])->getContent(); // call error
+            exit();
         }
+
+        // check the exists user
+        ($token = JWTAuth::attempt($data->validated())) ? $this->message = ['message' => 'This is successful login', 'status' => 200, 'callback' => $this->createToken($token)] : $this->message = ['message' => 'This is user not found', 'status' => 401];
+        echo response()->json($this->message)->getContent();
     }
 
     public function signup(UserModel $model, Request $request)
@@ -40,15 +45,18 @@ class UserController extends Controller
             'password' => 'required'
         ]);
         // the check exist error then call error/signup
-        if ($data->errors()->all()) {
-            $this->message = ['errors' => $data->errors(), 'status' => 500]; // create an array for errors
-            echo response()->json($this->message)->getContent(); // call error
-        } else {
-            $data = array_merge($data->validated(), ['password' => Hash::make($request->input('password')), 'ip' => $request->ip()]); // update data password and ip address
-            // signup user
-            ($model->signup($data)) ? $this->message = ['message' => 'This is successful signup', 'status' => 201, 'callback' => $data['email']] : $this->message = ['message' => 'This is unsuccessful signup', 'status' => 500, 'callback' => $data['email']];
-            echo response()->json($this->message)->getContent(); // call messages
+        if ($data->fails()) {
+            echo response()->json(['errors' => $data->errors(), 'status' => 500])->getContent(); // call error
         }
+        $data = array_merge($data->validated(), ['password' => bcrypt($request->input('password')), 'ip' => $request->ip()]); // update data password and ip address
+        // signup user
+        ($signup = $model->signup($data)) ? $this->message = ['message' => 'This is successful signup', 'status' => 201, 'callback' => $this->createToken(JWTAuth::fromUser($signup), $signup)] : $this->message = ['message' => 'This is unsuccessful signup', 'status' => 500];
+        echo response()->json($this->message)->getContent(); // call messages
+    }
+
+    public function getUser()
+    {
+        echo response()->json(['user' => \auth()->user(), 'status' => 200])->getContent();
     }
 
     public function forgotPassword(UserModel $model, Request $request)
@@ -100,5 +108,16 @@ class UserController extends Controller
         $data = array_merge($data, ['password' => Hash::make($data['password'])]); // the update password hash
         ($model->changePassword($data)) ? $this->message = ['message' => 'The change password is successful', 'status' => 200] : $this->message = ['message' => 'The change password is unsuccessful', 'status' => 500]; // change password true/false
         echo response()->json($this->message)->getContent(); // call messages or error
+    }
+
+    protected function createToken($token, $user = null)
+    {
+        $user = ($auth = auth()->user()) ? $auth : $user;
+
+        return [
+            'access_token' => $token,
+            'expires_in' => time() * 60,
+            'user' => $user
+        ];
     }
 }
