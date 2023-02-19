@@ -1,33 +1,42 @@
 import {Link} from "react-router-dom";
-import {TabPanel} from "react-tabs";
+import {object, string} from "yup";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 
-const LoginView = () => {
+const LoginView = ({login}) => {
+    const validator = object({
+        email: string().trim().email().required(),
+        password: string().min(6).required(),
+    })
+    const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(validator)})
+    const loginHandle = (data) => login(data)
+
     return (
-        <TabPanel>
-            <form action="/" method="post">
-                {/* email */}
-                <div className="form_group">
-                    <input type="email" name="email_login" id="email_login" className="form_input" placeholder=""
-                           required/>
-                    <label htmlFor="email_login" className="form_label">Email Address</label>
-                </div>
-                {/* password */}
-                <div className="form_group">
-                    <input type="password" name="password_login" id="password_login" className="form_input"
-                           placeholder=""
-                           required/>
-                    <label htmlFor="password_login" className="form_label">Password</label>
-                </div>
-                {/* forgot password */}
-                <div className="flex justify-center">
-                    <Link to="/forgot-password" className="color-auro_metal_saurus text-sm my-2">Forgot password</Link>
-                </div>
-                {/* submit button */}
-                <button type="submit"
-                        className="bg_red_coral text-white text-lg font-bold w-full py-3.5 mt-16 rounded-2xl">Login
-                </button>
-            </form>
-        </TabPanel>
+        <form action="/" method="post" onSubmit={handleSubmit(loginHandle)}>
+            {/* email */}
+            <div className="form_group">
+                <input type="email" id="email_login" className="form_input" placeholder=""
+                       required {...register('email')}/>
+                <label htmlFor="email_login" className="form_label">Email Address</label>
+                <p className="text-xs error_text">{errors.email?.message}</p>
+            </div>
+            {/* password */}
+            <div className="form_group">
+                <input type="password" id="password_login" className="form_input"
+                       placeholder=""
+                       required {...register('password')}/>
+                <label htmlFor="password_login" className="form_label">Password</label>
+                <p className="text-xs error_text">{errors.password?.message}</p>
+            </div>
+            {/* forgot password */}
+            <div className="flex justify-center">
+                <Link to="/forgot-password" className="color-auro_metal_saurus text-sm my-2">Forgot password</Link>
+            </div>
+            {/* submit button */}
+            <button type="submit"
+                    className="bg_red_coral text-white text-lg font-bold w-full py-3.5 mt-16 rounded-2xl">Login
+            </button>
+        </form>
     )
 }
 

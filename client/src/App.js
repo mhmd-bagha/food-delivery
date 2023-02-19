@@ -10,7 +10,7 @@ function App({user}) {
     return (
         <Fragment>
             <Routes>
-                {Public()}
+                {Public(user)}
                 {Protected(user)}
             </Routes>
         </Fragment>

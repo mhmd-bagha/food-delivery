@@ -6,6 +6,7 @@ import Food from "./food";
 import Cart from "./cart";
 import Favorite from "./favorite";
 import Payment from "./payment";
+import User from "./user";
 
 export default combineReducers({
     deliveryInformation: deliveryInformation,
@@ -14,5 +15,6 @@ export default combineReducers({
     foods: Food,
     cart: Cart,
     favorite: Favorite,
-    payment: Payment
+    payment: Payment,
+    user:User
 })

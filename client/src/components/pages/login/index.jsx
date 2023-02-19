@@ -1,11 +1,13 @@
 import Header from "./header";
-import {Tab, TabList, Tabs} from "react-tabs";
+import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import "./styles.scss";
 import "../../../styles/forms.scss";
 import SignupView from "./signup-view";
 import LoginView from "./login-view";
+import {connect} from "react-redux";
+import {loginAuth, signupAuth} from "../../../api/auth";
 
-const Login = () => {
+const Login = ({login, signup, user}) => {
     return (
         <>
             {/* background full */}
@@ -23,15 +25,33 @@ const Login = () => {
                         <Tab className="tab">Sign up</Tab>
                     </TabList>
                     {/* contents login and sign up */}
-                    <div className="px-12">
+                    <div className="px-12 relative -top-3">
                         {/* login */}
-                        {LoginView()}
+                        <TabPanel>
+                            <LoginView login={login}/>
+                        </TabPanel>
                         {/* sign up */}
-                        {SignupView()}
+                        <TabPanel>
+                            <SignupView signup={signup} user={user}/>
+                        </TabPanel>
                     </div>
                 </Tabs>
             </section>
         </>
     )
 }
-export default Login
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (data) => loginAuth(data, dispatch),
+        signup: (data) => signupAuth(data, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
