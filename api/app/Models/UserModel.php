@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class UserModel extends Model
+class UserModel extends Authenticatable implements JWTSubject
 {
     use HasFactory;
 
     protected $table = 'users';
-    protected $fillable = ['first_name', 'last_name', 'phone_number', 'email', 'password', 'image', 'create_at', 'update_at', 'ip'];
+    protected $fillable = ['full_name', 'phone_number', 'email', 'password', 'image', 'create_at', 'update_at', 'ip'];
     const CREATED_AT = 'create_at';
     const UPDATED_AT = 'update_at';
 
@@ -19,12 +21,10 @@ class UserModel extends Model
         $existUser = UserModel::where('email', $data['email'])->exists();
         // the check exist user then return callback false/create user
         return (!$existUser) ? UserModel::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
+            'full_name' => $data['full_name'],
             'email' => $data['email'],
             'password' => $data['password'],
             'ip' => $data['ip'],
-            'create_at' => now(),
             'update_at' => null
         ]) : false;
     }
@@ -39,5 +39,15 @@ class UserModel extends Model
             default:
                 return false;
         }
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
