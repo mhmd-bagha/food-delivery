@@ -14,6 +14,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class UserController extends Controller
 {
     protected $message = [];
+    const EXPIRE_TOKEN = 60 * 60 * 168;
 
     public function __construct()
     {
@@ -56,7 +57,7 @@ class UserController extends Controller
 
     public function getUser()
     {
-        echo response()->json(['user' => \auth()->user(), 'status' => 200])->getContent();
+        echo response()->json(['user' => auth()->user(), 'status' => 200])->getContent();
     }
 
     public function forgotPassword(UserModel $model, Request $request)
@@ -116,7 +117,7 @@ class UserController extends Controller
 
         return [
             'access_token' => $token,
-            'expires_in' => time() * 60,
+            'expires_in' => self::EXPIRE_TOKEN,
             'user' => $user
         ];
     }

@@ -37,7 +37,8 @@ Route::prefix('user')->group(function () {
     // forgot password and change password
     Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
     Route::post('/change-password', [UserController::class, 'changePassword']);
-})->middleware('auth:api');
+    Route::post('/user', [UserController::class, 'getUser']);
+});
 // the routes cart
 Route::prefix('cart')->group(function () {
     Route::post('/add', [CartController::class, 'addFood']);
