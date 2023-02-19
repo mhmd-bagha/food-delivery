@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import {FiHeart} from "react-icons/fi";
+import priceFormat from "../../tools/price-format";
 
 const FavoritesView = ({favorites, deleteFavorite}) => {
     return (
@@ -25,7 +26,7 @@ const FavoritesView = ({favorites, deleteFavorite}) => {
                                 {/* price and add to cart */}
                                 <div className="flex justify-between items-center mt-6">
                                     {/* price */}
-                                    <p className="color-burlywood font-bold">${favorite.food_price}</p>
+                                    <p className="color-burlywood font-bold">${priceFormat(favorite.food_price)}</p>
                                     {/* add to cart */}
                                     <button type="button" className="bg_red_coral rounded-full p-3"
                                             onClick={() => deleteFavorite(favorite.favorite_id)}>

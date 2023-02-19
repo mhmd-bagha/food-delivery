@@ -1,6 +1,7 @@
 import {IoCloseSharp} from "react-icons/io5";
 import {Link} from "react-router-dom";
 import AlertConfirm from "../../tools/alert-confirm";
+import priceFormat from "../../tools/price-format";
 
 const CartItems = ({foods, delete_food}) => {
 
@@ -32,7 +33,7 @@ const CartItems = ({foods, delete_food}) => {
                                 {/* des */}
                                 <p className="color-auro_metal_saurus text-sm my-2">{food.food_materials}</p>
                                 {/* price */}
-                                <p className="color-burlywood font-bold my-2">${food.food_price}</p>
+                                <p className="color-burlywood font-bold my-2">${priceFormat(food.food_price)}</p>
                             </div>
                             {/* button delete food from cart */}
                             <button type="button" className="p-1.5 bg_gunmetal rounded-full"

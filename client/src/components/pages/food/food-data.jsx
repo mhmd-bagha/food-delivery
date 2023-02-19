@@ -1,5 +1,4 @@
 import {AiOutlineMinus, AiOutlinePlus} from "react-icons/ai";
-import {useState} from "react";
 
 const FoodData = ({food, foodCount, plusFoodCount, minusFoodCount}) => {
 

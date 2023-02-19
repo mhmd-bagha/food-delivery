@@ -1,8 +1,14 @@
 import {useEffect, useState} from "react";
 
-const PaymentList = () => {
+const PaymentList = ({setTypePay}) => {
+
     const [element, setElement] = useState("label_credit-card") // get/set id element state
+
     useEffect(() => {
+        changeActivePay()
+    }, [element])
+
+    const changeActivePay = () => {
         var getRadios = document.querySelectorAll('label') // get all radios button
         // for all radios and delete class active
         getRadios.forEach((e) => {
@@ -10,7 +16,13 @@ const PaymentList = () => {
         })
         var getRadio = document.getElementById(element) // get id from element
         getRadio.classList.add('bg-white') // change bg to white
-    })
+    }
+
+    const setPaymentWith = (type_payment, element_label) => {
+        setElement(element_label)
+        setTypePay(type_payment)
+    }
+
     return (
         <>
             {/* payment select list */}
@@ -19,7 +31,7 @@ const PaymentList = () => {
                 <div className="py-2">
                     <label htmlFor="credit-card" id="label_credit-card"
                            className="flex items-center form_check_label"
-                           onClick={() => setElement('label_credit-card')}>
+                           onClick={() => setPaymentWith('credit-cart', 'label_credit-card')}>
                         {/* input */}
                         <input type="radio" name="pay-select" id="credit-card" className="pay_select" defaultChecked/>
                         {/* image */}
@@ -35,7 +47,7 @@ const PaymentList = () => {
                 <div className="py-2">
                     <label htmlFor="paypal" id="label_paypal"
                            className="flex items-center form_check_label"
-                           onClick={() => setElement('label_paypal')}>
+                           onClick={() => setPaymentWith('paypal', 'label_paypal')}>
                         {/* input */}
                         <input type="radio" name="pay-select" id="paypal" className="pay_select"/>
                         {/* image */}
@@ -51,7 +63,7 @@ const PaymentList = () => {
                 <div className="py-2">
                     <label htmlFor="google-play" id="label_google-play"
                            className="flex items-center form_check_label"
-                           onClick={() => setElement('label_google-play')}>
+                           onClick={() => setPaymentWith('google-play', 'label_google-play')}>
                         {/* input */}
                         <input type="radio" name="pay-select" id="google-play" className="pay_select"/>
                         {/* image */}
