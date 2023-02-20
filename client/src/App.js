@@ -2,18 +2,25 @@ import {Routes} from "react-router-dom";
 import './styles/index.css'
 import {connect} from "react-redux";
 import Protected from "./routes/protected";
-import {Fragment} from "react";
 import Public from "./routes/public";
+import {refreshTokenAuth} from "./api/auth";
+import {useRefreshToken} from "./components/tools/auth-user";
+import {useEffect} from "react";
 
-function App({user}) {
+function App({user, refreshTokenAuth}) {
+    const reToken = useRefreshToken(user, refreshTokenAuth)
+
+    useEffect(() => {
+        return reToken
+    }, [reToken])
 
     return (
-        <Fragment>
+        <>
             <Routes>
                 {Public(user)}
                 {Protected(user)}
             </Routes>
-        </Fragment>
+        </>
     );
 }
 
@@ -23,4 +30,10 @@ const mapToStateProps = (state) => {
     }
 }
 
-export default connect(mapToStateProps, null)(App)
+const mapToDispatchProps = (dispatch) => {
+    return {
+        refreshTokenAuth: () => refreshTokenAuth(dispatch)
+    }
+}
+
+export default connect(mapToStateProps, mapToDispatchProps)(App)

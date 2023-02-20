@@ -7,7 +7,8 @@ import Profile from "../components/pages/profile";
 import History from "../components/pages/history";
 import Favorites from "../components/pages/favorites";
 
-const Protected = (user) => {
+const Protected = (user, reToken) => {
+
     return (
         <Route element={useAuth(user)}>
             <Route path='/cart' element={<Cart/>}/>

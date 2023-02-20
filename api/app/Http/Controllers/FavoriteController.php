@@ -7,6 +7,7 @@ use App\Models\FoodModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class FavoriteController extends Controller
 {
@@ -14,14 +15,17 @@ class FavoriteController extends Controller
 
     public function addFavorite(Request $request, FavoriteModel $model)
     {
-        $data = Validator::make($request->post(), ['user_id' => 'required', 'food_id' => 'required']);
+        $token = JWTAuth::getToken();
+        $user_id = JWTAuth::getPayload($token)->toArray()['sub']; // get user id
+
+        $data = Validator::make($request->post(), ['food_id' => 'required']);
         // check data is validate or return error
         if ($data->fails()) {
             echo response()->json(['errors' => 'Submited data is incomplated', 'status' => 500])->getContent();
             exit();
         }
-        $data = $data->validated();
-        $existFavorite = $model->where('user_id', $data['user_id'])->where('food_id', $data['food_id']); // check exist favorite
+        $data = array_merge($data->validated(), ['user_id' => $user_id]);
+        $existFavorite = $model->where('user_id', $user_id)->where('food_id', $data['food_id']); // check exist favorite
         if ($existFavorite->exists()) {
             echo response()->json(['errors' => 'already added', 'status' => 500])->getContent();
             exit();
@@ -33,13 +37,9 @@ class FavoriteController extends Controller
 
     public function getFavorite(Request $request, FavoriteModel $model)
     {
-        $user_id = Validator::make($request->post(), ['user_id' => 'required']);
-        // check data is validate or return error
-        if ($user_id->fails()) {
-            echo response()->json(['errors' => 'Submited data is incomplated', 'status' => 500])->getContent();
-            exit();
-        }
-        $user_id = $user_id->validated()['user_id'];
+        $token = JWTAuth::getToken();
+        $user_id = JWTAuth::getPayload($token)->toArray()['sub']; // get user id
+
         $getFavorite = $model->where('user_id', $user_id);
         if ($getFavorite->exists()) {
             // get food
