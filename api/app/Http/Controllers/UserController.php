@@ -108,6 +108,11 @@ class UserController extends Controller
         echo response()->json($this->message)->getContent(); // call messages or error
     }
 
+    public function refreshToken()
+    {
+        return $this->createToken(auth()->refresh(true, true));
+    }
+
     protected function createToken($token, $user = null)
     {
         $user = ($auth = auth()->user()) ? $auth : $user;

@@ -4,14 +4,15 @@ import {connect} from "react-redux";
 import Protected from "./routes/protected";
 import {Fragment} from "react";
 import Public from "./routes/public";
+import {refreshTokenAuth} from "./api/auth";
 
-function App({user}) {
+function App({user, refreshToken}) {
 
     return (
         <Fragment>
             <Routes>
                 {Public(user)}
-                {Protected(user)}
+                {Protected(user, refreshToken)}
             </Routes>
         </Fragment>
     );
@@ -23,4 +24,10 @@ const mapToStateProps = (state) => {
     }
 }
 
-export default connect(mapToStateProps, null)(App)
+const mapToDispatchProps = (state) => {
+    return {
+        refreshToken: () => refreshTokenAuth()
+    }
+}
+
+export default connect(mapToStateProps, mapToDispatchProps)(App)

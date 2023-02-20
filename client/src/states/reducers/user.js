@@ -1,4 +1,4 @@
-import {AUTH_LOGIN, AUTH_SIGNUP, ERROR_API, START_API} from "../actions-type/user";
+import {AUTH_LOGIN, AUTH_SIGNUP, ERROR_API, REFRESH_TOKEN, START_API} from "../actions-type/user";
 
 const initialState = {
     user: null,
@@ -28,6 +28,8 @@ const User = (state = initialState, action) => {
                 }
             }
             break;
+        case REFRESH_TOKEN:
+            return {...state, loading: false, token: action.payload.token}
         case ERROR_API:
             return {...state, loading: false, message: action.message}
         default:

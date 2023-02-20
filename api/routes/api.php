@@ -38,6 +38,7 @@ Route::prefix('user')->group(function () {
     Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
     Route::post('/change-password', [UserController::class, 'changePassword']);
     Route::post('/user', [UserController::class, 'getUser']);
+    Route::post('/refresh-token', [UserController::class, 'refreshToken'])->middleware('jwt.refresh');
 });
 // the routes cart
 Route::prefix('cart')->group(function () {
