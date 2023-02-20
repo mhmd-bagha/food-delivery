@@ -31,7 +31,7 @@ class UserModel extends Authenticatable implements JWTSubject
 
     public function changePassword($data)
     {
-        $user = UserModel::where('email', $data['user']);
+        $user = UserModel::find($data['user_id']);
         switch ($user->exists()) {
             case true:
                 return $user->update(['password' => $data['password']]);

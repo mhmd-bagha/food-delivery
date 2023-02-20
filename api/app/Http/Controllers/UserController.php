@@ -85,15 +85,12 @@ class UserController extends Controller
 
     public function changePassword(UserModel $model, Request $request)
     {
-        $data = [
-            'password' => '123',
-            're_password' => '123',
-            'user' => 'gusikowski.braulio@dooley.org'
-        ];
-        $data = Validator::make($data, [
+        $token = JWTAuth::getToken();
+        $user_id = JWTAuth::getPayload($token)->toArray()['sub']; // get user id
+
+        $data = Validator::make($request->post(), [
             're_password' => 'required',
-            'password' => 'required',
-            'user' => 'required'
+            'password' => 'required'
         ]);
         // return errors if exist error
         if ($data->fails()) {
@@ -106,7 +103,7 @@ class UserController extends Controller
             echo response()->json(['errors' => 'The password not equals with re password', 'status' => 500])->getContent();
             exit();
         }
-        $data = array_merge($data, ['password' => Hash::make($data['password'])]); // the update password hash
+        $data = array_merge($data, ['password' => Hash::make($data['password']), 'user_id' => $user_id]); // the update password hash
         ($model->changePassword($data)) ? $this->message = ['message' => 'The change password is successful', 'status' => 200] : $this->message = ['message' => 'The change password is unsuccessful', 'status' => 500]; // change password true/false
         echo response()->json($this->message)->getContent(); // call messages or error
     }
