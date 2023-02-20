@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
@@ -110,7 +111,21 @@ class UserController extends Controller
 
     public function refreshToken()
     {
-        return $this->createToken(auth()->refresh(true, true));
+
+        try {
+            if ($token = JWTAuth::getToken()) {
+                JWTAuth::checkOrFail();
+            }
+            $user = JWTAuth::authenticate();
+        } catch (TokenExpiredException $e) {
+            JWTAuth::setToken(JWTAuth::refresh());
+            $user = JWTAuth::authenticate();
+        }
+        if ($user) {
+            return $this->createToken(JWTAuth::getToken()->get());
+        } else {
+            return response()->json(['data' => 'this is user not found', 'status' => 401], 401)->getContent();
+        }
     }
 
     protected function createToken($token, $user = null)

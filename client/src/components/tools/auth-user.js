@@ -14,3 +14,10 @@ export const GetToken = () => {
         return user.token
     } else return null
 }
+
+export const useRefreshToken = (user, refreshToken) => {
+    if (user.auth) {
+        const expiredToken = ExpiredToken(user.token)
+        return (expiredToken) ? refreshToken : undefined
+    }
+}
