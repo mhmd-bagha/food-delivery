@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
@@ -18,7 +19,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $this->middleware(['jwt.auth', 'auth'], ['except' => ['login', 'signup']]);
     }
 
     public function login(Request $request)
@@ -85,15 +86,12 @@ class UserController extends Controller
 
     public function changePassword(UserModel $model, Request $request)
     {
-        $data = [
-            'password' => '123',
-            're_password' => '123',
-            'user' => 'gusikowski.braulio@dooley.org'
-        ];
-        $data = Validator::make($data, [
+        $token = JWTAuth::getToken();
+        $user_id = JWTAuth::getPayload($token)->toArray()['sub']; // get user id
+
+        $data = Validator::make($request->post(), [
             're_password' => 'required',
-            'password' => 'required',
-            'user' => 'required'
+            'password' => 'required'
         ]);
         // return errors if exist error
         if ($data->fails()) {
@@ -106,9 +104,28 @@ class UserController extends Controller
             echo response()->json(['errors' => 'The password not equals with re password', 'status' => 500])->getContent();
             exit();
         }
-        $data = array_merge($data, ['password' => Hash::make($data['password'])]); // the update password hash
+        $data = array_merge($data, ['password' => Hash::make($data['password']), 'user_id' => $user_id]); // the update password hash
         ($model->changePassword($data)) ? $this->message = ['message' => 'The change password is successful', 'status' => 200] : $this->message = ['message' => 'The change password is unsuccessful', 'status' => 500]; // change password true/false
         echo response()->json($this->message)->getContent(); // call messages or error
+    }
+
+    public function refreshToken()
+    {
+
+        try {
+            if ($token = JWTAuth::getToken()) {
+                JWTAuth::checkOrFail();
+            }
+            $user = JWTAuth::authenticate();
+        } catch (TokenExpiredException $e) {
+            JWTAuth::setToken(JWTAuth::refresh());
+            $user = JWTAuth::authenticate();
+        }
+        if ($user) {
+            return $this->createToken(JWTAuth::getToken()->get());
+        } else {
+            return response()->json(['data' => 'this is user not found', 'status' => 401], 401)->getContent();
+        }
     }
 
     protected function createToken($token, $user = null)
