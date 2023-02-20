@@ -8,6 +8,7 @@ use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CartController extends Controller
 {
@@ -18,10 +19,12 @@ class CartController extends Controller
 
     public function addFood(Request $request, CartModel $model)
     {
+        $token = JWTAuth::getToken();
+        $user_id = JWTAuth::getPayload($token)->toArray()['sub']; // get user id
+
         $data = Validator::make($request->post(), [
             'food_id' => 'required',
             'food_count' => 'required',
-            'user_id' => 'required',
         ]);
         // check data is validate or return error
         if ($data->fails()) {
@@ -29,9 +32,9 @@ class CartController extends Controller
             exit();
         }
         // merge/update data added ip,status and time create
-        $data = array_merge($data->validated(), ['status' => self::WAIT_CART_STATUS, 'ip' => $request->ip(), 'create_at' => now()]);
+        $data = array_merge($data->validated(), ['status' => self::WAIT_CART_STATUS, 'ip' => $request->ip(), 'create_at' => now(), 'user_id' => $user_id]);
         // check the user not exist then call error
-        if (!UserModel::find($data['user_id'])) {
+        if (!UserModel::find($user_id)) {
             echo response()->json(['errors' => 'The user not found', 'status' => 500])->getContent();
             exit();
         }
@@ -40,7 +43,7 @@ class CartController extends Controller
             echo response()->json(['errors' => 'The food not found', 'status' => 500])->getContent();
             exit();
         }
-        $getFood = $model->where('user_id', $data['user_id'])->where('food_id', $data['food_id'])->where('status', self::WAIT_CART_STATUS); // get food if exist
+        $getFood = $model->where('user_id', $user_id)->where('food_id', $data['food_id'])->where('status', self::WAIT_CART_STATUS); // get food if exist
         switch ($getFood->exists()) {
             case true:
                 $foodCount = $data['food_count'] + $getFood->first()->food_count;
@@ -56,13 +59,9 @@ class CartController extends Controller
 
     public function getCart(Request $request, CartModel $model)
     {
-        $user_id = Validator::make($request->post(), ['user_id' => 'required']);
-        // check data is validate or return error
-        if ($user_id->fails()) {
-            echo response()->json(['errors' => 'Submited data is incomplated', 'status' => 500])->getContent();
-            exit();
-        }
-        $user_id = $user_id->validate()['user_id']; // get user id validated
+        $token = JWTAuth::getToken();
+        $user_id = JWTAuth::getPayload($token)->toArray()['sub']; // get user id
+
         $cartFoods = $model->where('user_id', $user_id)->where('status', self::WAIT_CART_STATUS); // get cart isn't empty
         switch ($cartFoods->exists()) {
             case true:
