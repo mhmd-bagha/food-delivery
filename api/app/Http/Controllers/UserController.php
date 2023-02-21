@@ -113,16 +113,13 @@ class UserController extends Controller
     {
 
         try {
-            if ($token = JWTAuth::getToken()) {
-                JWTAuth::checkOrFail();
-            }
             $user = JWTAuth::authenticate();
         } catch (TokenExpiredException $e) {
             JWTAuth::setToken(JWTAuth::refresh());
             $user = JWTAuth::authenticate();
         }
         if ($user) {
-            return $this->createToken(JWTAuth::getToken()->get());
+            return $this->createToken(JWTAuth::fromUser($user));
         } else {
             return response()->json(['data' => 'this is user not found', 'status' => 401], 401)->getContent();
         }
