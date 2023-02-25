@@ -1,8 +1,7 @@
 import {IoBagHandleOutline} from "react-icons/io5";
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
 import {useEffect} from "react";
-import getFoods from "../../../api/food";
+import priceFormat from "../../tools/price-format";
 
 const Food = ({getFoods, foods}) => {
 
@@ -29,7 +28,7 @@ const Food = ({getFoods, foods}) => {
                                 {/* price and add to cart */}
                                 <div className="flex justify-between items-center mt-6">
                                     {/* price */}
-                                    <p className="color-burlywood font-bold">${food.food_price}</p>
+                                    <p className="color-burlywood font-bold">${priceFormat(food.food_price)}</p>
                                     {/* add to cart */}
                                     <Link to={'/food/' + food.id}>
                                         <button type="button" className="bg_red_coral rounded-full p-3">
@@ -46,15 +45,4 @@ const Food = ({getFoods, foods}) => {
     )
 }
 
-const mapToStateProps = (state) => {
-    return {
-        foods: state.foods
-    }
-}
-const mapToDispatchProps = (dispatch) => {
-    return {
-        getFoods: () => getFoods(dispatch)
-    }
-}
-
-export default connect(mapToStateProps, mapToDispatchProps)(Food)
+export default Food

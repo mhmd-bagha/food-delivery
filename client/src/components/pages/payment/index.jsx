@@ -4,8 +4,26 @@ import PaymentList from "./payment-list";
 import Header from "./header";
 import CouponTaxation from "./coupon-taxation";
 import TotalPriceNext from "../../ui/total-price-next";
+import {connect} from "react-redux";
+import {setTypePay} from "../../../states/actions/payment";
+import {useEffect, useRef} from "react";
+import {addPayment} from "../../../api/payment";
 
-const Payment = () => {
+const Payment = ({cart, setTypePay, payment, addPay}) => {
+    const coupon = useRef(null)
+    const btnPay = useRef(null)
+    const totalPriceTaxation = cart.total_price + payment.taxation // addition total price with taxation
+
+    useEffect(() => {
+        pay()
+    }, [btnPay])
+
+    const pay = () => {
+        btnPay.current.addEventListener('click', () => {
+            return addPay({coupon: coupon.current.value, total_price: totalPriceTaxation, type_pay: payment.type})
+        })
+    }
+
     return (
         <>
             {/* background full */}
@@ -15,14 +33,29 @@ const Payment = () => {
                     {/* header */}
                     <Header/>
                     {/* payment select list */}
-                    <PaymentList/>
+                    <PaymentList setTypePay={setTypePay}/>
                     {/* coupon code and taxation */}
-                    <CouponTaxation/>
+                    <CouponTaxation coupon={coupon} taxation={payment.taxation}/>
                 </div>
                 {/* total price and next top level */}
-                <TotalPriceNext totalPrice='33,50' linkText='Order Now' linkUrl='delivery-information'/>
+                <TotalPriceNext totalPrice={totalPriceTaxation} linkText='Order Now' linkUrl='payment'
+                                buttonRef={btnPay}/>
             </section>
         </>
     )
 }
-export default Payment
+
+const mapToStateProps = (state) => {
+    return {
+        cart: state.cart,
+        payment: state.payment
+    }
+}
+const mapToDispatchProps = (dispatch) => {
+    return {
+        setTypePay: (type_payment) => dispatch(setTypePay(type_payment)),
+        addPay: (data) => addPayment(data, dispatch)
+    }
+}
+
+export default connect(mapToStateProps, mapToDispatchProps)(Payment)
