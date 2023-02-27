@@ -77,34 +77,30 @@ class CartController extends Controller
         $token = JWTAuth::getToken();
         $user_id = JWTAuth::getPayload($token)->toArray()['sub']; // get user id
 
-        $cartFoods = $model->where('user_id', $user_id)->where('status', self::WAIT_CART_STATUS); // get cart isn't empty
-        switch ($cartFoods->exists()) {
-            case true:
-                $totalPrice = 0;
+        $get_cart = $model->where('user_id', $user_id)->where('status', self::WAIT_CART_STATUS)->first();
+        $foods_information = [];
 
-                foreach ($cartFoods->get() as $cartFood):
-                    $getFood = FoodModel::find($cartFood->food_id);
-                    $totalPrice += $getFood->food_price * $cartFood->food_count;
-                    Arr::add($getFood, 'food_count', $cartFood->food_count);
-                    Arr::add($getFood, 'cart_id', $cartFood->id);
-                    $getFoods[] = $getFood;
-                endforeach;
+        if ($get_cart) {
+            $totalPrice = $get_cart->total_amount;
+            $cart_items = $get_cart->foods()->get()->toarray();
+            // get food and add to array
+            foreach ($cart_items as $cart_item):
+                $get_food = FoodModel::find($cart_item['food_id'])->toArray();
+                $foods_information[] = Arr::collapse([['cart' => $cart_item], $get_food]);
+            endforeach;
+            $this->messages = ['data' => $foods_information, 'totalPrice' => $totalPrice, 'status' => 200];
+        } else
+            $this->messages = ['message' => 'The empty cart', 'status' => 500];
 
-                $this->messages = ['data' => $getFoods, 'totalPrice' => $totalPrice, 'status' => 200]; // return data cart
-                break;
-            default:
-                $this->messages = ['message' => 'The empty cart', 'status' => 200]; // return response empty cart
-                break;
-        }
-        echo response()->json($this->messages)->getContent(); // call response
+        echo response()->json($this->messages)->getContent();
     }
 
-    public function deleteFood(CartModel $model, $cart_id)
+    public function deleteFood($cartId, $foodId, CartModel $model, CartItemsModel $itemsModel)
     {
-        $getCart = $model->find($cart_id); // get food cart by cart id
+        $getCartItem = $itemsModel->where('food_id', $foodId)->where('cart_id', $cartId);
         // check exist food cart then it deleted
-        if ($getCart) {
-            $deleteCart = $getCart->delete(); // delete food cart return true/false
+        if ($getCartItem) {
+            $deleteCart = $getCartItem->delete(); // delete food cart return true/false
             ($deleteCart) ? $this->messages = ['message' => 'The delete food is successful', 'status' => 200] : $this->messages = ['message' => 'An error is occurred', 'status' => 500]; // return response from deleted food cart
         } else $this->messages = ['message' => 'An error is occurred', 'status' => 500]; // call error for not exist food cart
         echo response()->json($this->messages)->getContent(); // call response

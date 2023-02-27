@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CartModel extends Model
 {
@@ -22,5 +23,10 @@ class CartModel extends Model
     public function findCartAndUpdate($cart_id, $data)
     {
         return CartModel::find($cart_id)->update($data);
+    }
+
+    public function foods(): HasMany
+    {
+        return $this->hasMany(CartItemsModel::class, 'cart_id');
     }
 }
