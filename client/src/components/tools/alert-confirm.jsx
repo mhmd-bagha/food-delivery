@@ -2,10 +2,10 @@ import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import '../../styles/confirm-alert.scss'
 
-const AlertConfirm = (method, cartId) => {
+const AlertConfirm = (method, cartId, foodId) => {
 
     const accept = (onClose) => {
-        method(cartId)
+        method(cartId, foodId)
         onClose()
     }
 

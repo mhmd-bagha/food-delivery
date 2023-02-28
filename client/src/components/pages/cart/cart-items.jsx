@@ -5,8 +5,8 @@ import priceFormat from "../../tools/price-format";
 
 const CartItems = ({foods, delete_food}) => {
 
-    const deleteFoodCart = (cartId) => {
-        AlertConfirm(delete_food, cartId)
+    const deleteFoodCart = (cartId, foodId) => {
+        AlertConfirm(delete_food, cartId, foodId)
     }
 
     return (
@@ -21,7 +21,7 @@ const CartItems = ({foods, delete_food}) => {
                             <img src={food.food_image} alt={food.food_name} className="h-20 w-40"/>
                         </Link>
                         {/* food number */}
-                        <p className="color-auro_metal_saurus font-bold mr-5 lg:mr-8">{food.food_count}x</p>
+                        <p className="color-auro_metal_saurus font-bold mr-5 lg:mr-8">{food.cart.food_count}x</p>
                         {/* name and des and price and button delete food */}
                         <div className="flex justify-between items-baseline w-full">
                             {/* food data */}
@@ -37,8 +37,9 @@ const CartItems = ({foods, delete_food}) => {
                             </div>
                             {/* button delete food from cart */}
                             <button type="button" className="p-1.5 bg_gunmetal rounded-full"
-                                    onClick={() => deleteFoodCart(food.cart_id)}><IoCloseSharp size={17}
-                                                                                               className="color-auro_metal_saurus"/>
+                                    onClick={() => deleteFoodCart(food.cart.cart_id, food.cart.food_id)}><IoCloseSharp
+                                size={17}
+                                className="color-auro_metal_saurus"/>
                             </button>
                         </div>
                     </div>
