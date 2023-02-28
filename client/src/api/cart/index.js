@@ -21,11 +21,11 @@ export const getCart = async (userId, dispatch) => {
     }
 }
 
-export const deleteFood = async (cartId, dispatch) => {
+export const deleteFood = async (cartId, foodId, dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.delete('/cart/delete/cart-id/' + cartId)
+    const res = await axiosInstance.delete(`/cart/delete/cart-id/${cartId}/food-id/${foodId}`)
     try {
-        dispatch(deleteFoodCart(cartId, res.data.message))
+        dispatch(deleteFoodCart(foodId, res.data.message))
     } catch (err) {
         dispatch(errorApi(err.data))
     }

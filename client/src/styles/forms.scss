@@ -35,6 +35,14 @@
     margin-top: 2.1rem;
   }
 
+  // error text
+  .error_text {
+    position: relative;
+    top: -.75rem;
+    padding-left: .5rem;
+    color: $red_coral;
+  }
+
   // form internal
   .form_label_internal {
     margin-top: 2.1rem;
@@ -42,6 +50,7 @@
 
   .form_input_internal:is(:focus, :valid) {
     padding: 1.7rem 0 .5rem 1.6rem;
+
     & + .form_label_internal {
       transform: translate(0, -.6rem);
     }

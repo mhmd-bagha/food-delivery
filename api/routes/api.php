@@ -37,16 +37,18 @@ Route::prefix('user')->group(function () {
     // forgot password and change password
     Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
     Route::post('/change-password', [UserController::class, 'changePassword']);
+    Route::post('/user', [UserController::class, 'getUser']);
+    Route::post('/refresh-token', [UserController::class, 'refreshToken'])->middleware('jwt.refresh');
 });
 // the routes cart
 Route::prefix('cart')->group(function () {
     Route::post('/add', [CartController::class, 'addFood']);
     Route::post('/get', [CartController::class, 'getCart']);
-    Route::delete('/delete/cart-id/{cart_id}', [CartController::class, 'deleteFood']);
-});
+    Route::delete('/delete/cart-id/{cartId}/food-id/{foodId}', [CartController::class, 'deleteFood']);
+})->middleware(['jwt.auth', 'auth:api']);
 // add/get favorite
 Route::prefix('favorites')->group(function () {
     Route::post('/', [FavoriteController::class, 'getFavorite']);
     Route::post('/add', [FavoriteController::class, 'addFavorite']);
-    Route::delete('/delete/{favoriteId}', [FavoriteController::class, 'deletefavorite']);
-});
+    Route::delete('/delete/{favoriteId}', [FavoriteController::class, 'deleteFavorite']);
+})->middleware(['jwt.auth', 'auth:api']);
