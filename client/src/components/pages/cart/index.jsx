@@ -38,7 +38,7 @@ const mapToStateProps = (state) => {
 const mapToDispatchProps = (dispatch) => {
     return {
         getCart: (userId) => getCart(userId, dispatch),
-        deleteFoodCart: (cartId) => deleteFood(cartId, dispatch),
+        deleteFoodCart: (cartId, foodId) => deleteFood(cartId, foodId, dispatch),
     }
 }
 
