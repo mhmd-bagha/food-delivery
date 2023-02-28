@@ -44,7 +44,7 @@ Route::prefix('user')->group(function () {
 Route::prefix('cart')->group(function () {
     Route::post('/add', [CartController::class, 'addFood']);
     Route::post('/get', [CartController::class, 'getCart']);
-    Route::delete('/delete/cart-id/{cart_id}', [CartController::class, 'deleteFood']);
+    Route::delete('/delete/cart-id/{cartId}/food-id/{foodId}', [CartController::class, 'deleteFood']);
 })->middleware(['jwt.auth', 'auth:api']);
 // add/get favorite
 Route::prefix('favorites')->group(function () {

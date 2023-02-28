@@ -97,12 +97,35 @@ class CartController extends Controller
 
     public function deleteFood($cartId, $foodId, CartModel $model, CartItemsModel $itemsModel)
     {
-        $getCartItem = $itemsModel->where('food_id', $foodId)->where('cart_id', $cartId);
-        // check exist food cart then it deleted
-        if ($getCartItem) {
-            $deleteCart = $getCartItem->delete(); // delete food cart return true/false
-            ($deleteCart) ? $this->messages = ['message' => 'The delete food is successful', 'status' => 200] : $this->messages = ['message' => 'An error is occurred', 'status' => 500]; // return response from deleted food cart
-        } else $this->messages = ['message' => 'An error is occurred', 'status' => 500]; // call error for not exist food cart
+        $getCartItem = $itemsModel->where('food_id', $foodId)->where('cart_id', $cartId)->first();
+
+        // check exist food cart
+        if (!$getCartItem->exists()) {
+            echo response()->json(['message' => 'An error is occurred', 'status' => 500])->getContent();
+            exit();
+        }
+
+        $getCart = $model->find($cartId);
+        $getFood = FoodModel::find($foodId);
+        $cartCount = $getCartItem->count();
+        $totalAmount = $getCart->total_amount - $getFood->food_price * $getCartItem->food_count;
+
+        if ($getCartItem->delete()) {
+
+            // delete column cart if cart equal 1
+            if ($cartCount === 1) {
+                $getCart->delete(); // delete cart
+                echo response()->json(['message' => 'The delete food is successful', 'status' => 200])->getContent();
+                exit();
+            }
+
+            $getCart->update(['total_amount' => $totalAmount]);
+
+            $this->messages = ['message' => 'The delete food is successful', 'status' => 200];
+        } else
+            $this->messages = ['message' => 'An error is occurred', 'status' => 500]; // return response from deleted food cart
+
+
         echo response()->json($this->messages)->getContent(); // call response
     }
 
