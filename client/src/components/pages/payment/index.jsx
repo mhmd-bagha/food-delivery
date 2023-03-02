@@ -12,7 +12,7 @@ import {addPayment} from "../../../api/payment";
 const Payment = ({cart, setTypePay, payment, addPay}) => {
     const coupon = useRef(null)
     const btnPay = useRef(null)
-    const totalPriceTaxation = cart.total_price + payment.taxation // addition total price with taxation
+    const totalPriceTaxation = parseInt(cart.total_price) + parseInt(payment.taxation) // addition total price with taxation
 
     useEffect(() => {
         pay()
