@@ -1,8 +1,5 @@
 name: Food Store Delivery Laravel
 
-folders: 
-  - map: api/
-
 on:
   push:
     branches: [ "deploy" ]
@@ -19,17 +16,17 @@ jobs:
           php-version: '8.2.2'
       - uses: actions/checkout@v3
       - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+        run: cd ./api/ php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies
-        run: composer update
+        run: cd ./api/ composer update
       - name: Generate key
-        run: php artisan key:generate
+        run: cd ./api/ php artisan key:generate
       - name: Config cache
-          run: php artisan config:cache
+          run: cd ./api/ php artisan config:cache
       - name: route cache
-        run: php artisan route:cache
+        run: cd ./api/ php artisan route:cache
       - name: Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
+        run: cd ./api/ chmod -R 777 storage bootstrap/cache
       - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
