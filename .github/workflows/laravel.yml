@@ -30,4 +30,4 @@ jobs:
         env:
           DB_CONNECTION: mysql
           DB_DATABASE: food_store
-        run: cd./api/ && php artisan serve --host=0.0.0.0 --port=8000
+        run: cd ./api/ && php artisan serve --host=0.0.0.0 --port=8000
