@@ -19,13 +19,13 @@ jobs:
       - name: Go to path project
         run: cd ./api/
       - name: Copy .env
-        run: cd./api/ && php -r "file_exists('.env') || copy('.env.example', '.env');"
+        run: cd ./api/ && php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies
         run: cd./api/ && composer install
       - name: Generate key
-        run: cd./api/ && php artisan key:generate
+        run: cd ./api/ && php artisan key:generate
       - name: Directory Permissions
-        run: cd./api/ && chmod -R 777 storage bootstrap/cache
+        run: cd ./api/ && chmod -R 777 storage bootstrap/cache
       - name: Run laravel
         env:
           DB_CONNECTION: mysql
