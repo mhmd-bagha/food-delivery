@@ -1,5 +1,8 @@
 name: Food Store Delivery Laravel
 
+folders: 
+  - map: api/
+
 on:
   push:
     branches: [ "deploy" ]
