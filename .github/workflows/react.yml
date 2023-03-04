@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "deploy" ]
     paths:
-      - 'client/'
+      - ./client/
 
 jobs:
   deploy:
