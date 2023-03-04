@@ -20,4 +20,5 @@ jobs:
           node-version: 16
       - run: npm i -g surge
       - run: cd ./client/ && npm install
+      - run: ls ./client
       - run: surge ./client/ ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
