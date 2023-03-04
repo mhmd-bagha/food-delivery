@@ -14,15 +14,15 @@ const Payment = ({cart, setTypePay, payment, addPay}) => {
     const btnPay = useRef(null)
     const totalPriceTaxation = parseInt(cart.total_price) + parseInt(payment.taxation) // addition total price with taxation
 
-    useEffect(() => {
-        pay()
-    }, [btnPay])
-
     const pay = () => {
         btnPay.current.addEventListener('click', () => {
             return addPay({coupon: coupon.current.value, total_price: totalPriceTaxation, type_pay: payment.type})
         })
     }
+
+    useEffect(() => {
+        pay()
+    }, [pay])
 
     return (
         <>
