@@ -1,6 +1,6 @@
 import {FiHeart} from "react-icons/fi";
 import Back from "../../tools/back";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 
 const Header = ({addFavorite, foodId, userId, favorite}) => {
     // default color icon add to favorite
@@ -11,13 +11,13 @@ const Header = ({addFavorite, foodId, userId, favorite}) => {
         setColorFavorite('color-red_coral')
     }
 
-
-    const existFoodFavorite = () => {
+    const existFoodFavorite = useCallback(() => {
         foodId = parseInt(foodId) // change typeof food id to int
         let existFavorite = favorite.find(({id, user_id}) => user_id === userId && id === foodId) // check exist food in favorite
         defaultColor = (existFavorite) ? defaultColor = 'color-red_coral' : defaultColor
         setColorFavorite(defaultColor)
-    }
+    }, [])
+
     // set color
     const setColorFavorite = (color) => {
         const favorite_icon = document.getElementById('favorite_icon')
