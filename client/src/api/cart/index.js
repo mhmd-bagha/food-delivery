@@ -11,9 +11,9 @@ export const addFood = async (data, dispatch) => {
     }
 }
 
-export const getCart = async (userId, dispatch) => {
+export const getCart = async (dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.post('/cart/get', userId)
+    const res = await axiosInstance.post('/cart/get')
     try {
         dispatch(fetchDataCart(res.data.data, res.data.totalPrice))
     } catch (err) {

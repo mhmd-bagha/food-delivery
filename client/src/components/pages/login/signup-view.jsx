@@ -1,7 +1,6 @@
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {object, string} from "yup";
-import Auth from "../../tools/auth-user";
 
 const SignupView = ({signup, user}) => {
     const validator = object({

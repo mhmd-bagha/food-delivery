@@ -14,7 +14,7 @@ const Food = ({food, getFood, addToCart, incrementFoodCount, decrementFoodCount,
 
     useEffect(() => {
         getFood(FoodId)
-    }, [])
+    }, [FoodId, getFood])
 
     return (<>
         <section className="bg_dark">

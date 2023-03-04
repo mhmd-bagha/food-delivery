@@ -8,8 +8,8 @@ import {useEffect} from "react";
 const Favorites = ({favorite, getFavorite, deleteFavorite}) => {
 
     useEffect(() => {
-        getFavorite({user_id: 5})
-    }, [])
+        getFavorite()
+    }, [getFavorite])
 
     return (
         <>
@@ -34,7 +34,7 @@ const mapToStateProps = (state) => {
 }
 const mapToDispatchProps = (dispatch) => {
     return {
-        getFavorite: (user_id) => getFavorites(user_id, dispatch),
+        getFavorite: () => getFavorites(dispatch),
         deleteFavorite: (favorite_id) => deleteFavorite(favorite_id, dispatch)
     }
 }

@@ -7,7 +7,7 @@ const Food = ({getFoods, foods}) => {
 
     useEffect(() => {
         getFoods()
-    }, [])
+    }, [getFoods])
 
     return (
         <>
