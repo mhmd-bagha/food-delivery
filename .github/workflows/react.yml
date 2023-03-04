@@ -18,5 +18,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '18.14.2'
-      - run: cd ./client/ && npm i -g surge
-      - run: surge ./client ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+      - run: ls
+      - run: npm i -g surge
+      - run: surge ./ ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
