@@ -56,21 +56,21 @@ const DeliveryInformation = ({deliveryInformationProps, setCurrentPositionMap, s
                         {/* dow down */}
                         <div className="dots_down">
                             {/* white dot */}
-                            <p className="dot_white"></p>
+                            <p className="dot_white"/>
                             {/* white dot */}
-                            <p className="dot_white"></p>
+                            <p className="dot_white"/>
                             {/* white dot */}
-                            <p className="dot_white"></p>
+                            <p className="dot_white"/>
                             {/* white dot */}
-                            <p className="dot_white"></p>
+                            <p className="dot_white"/>
                             {/* white dot */}
-                            <p className="dot_white"></p>
+                            <p className="dot_white"/>
                             {/* dark dot */}
-                            <p className="dot_dark"></p>
+                            <p className="dot_dark"/>
                             {/* dark dot */}
-                            <p className="dot_dark"></p>
+                            <p className="dot_dark"/>
                             {/* dark dot */}
-                            <p className="dot_dark"></p>
+                            <p className="dot_dark"/>
                         </div>
                         {/* address */}
                         <div className="flex items-center mt-1">
@@ -89,7 +89,7 @@ const DeliveryInformation = ({deliveryInformationProps, setCurrentPositionMap, s
                             {/* image, name and type person */}
                             <div className="flex items-center">
                                 {/* image */}
-                                <img src={require('../../../assets/images/person.jpg')} alt="image food courier"
+                                <img src={require('../../../assets/images/person.jpg')} alt="food courier"
                                      className="h-16 w-16 rounded-full"/>
                                 <div className="ml-5">
                                     {/* name */}
