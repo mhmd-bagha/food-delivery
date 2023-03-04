@@ -6,11 +6,11 @@ import {connect} from "react-redux";
 import {useEffect} from "react";
 import CartEmpty from "./cart-empty";
 
-const Cart = ({cart, getCart, deleteFoodCart, user_id}) => {
+const Cart = ({cart, getCart, deleteFoodCart}) => {
 
     useEffect(() => {
-        getCart({user_id: 5})
-    }, [])
+        getCart()
+    }, [getCart])
 
     return (
         <>
@@ -37,7 +37,7 @@ const mapToStateProps = (state) => {
 }
 const mapToDispatchProps = (dispatch) => {
     return {
-        getCart: (userId) => getCart(userId, dispatch),
+        getCart: () => getCart(dispatch),
         deleteFoodCart: (cartId, foodId) => deleteFood(cartId, foodId, dispatch),
     }
 }

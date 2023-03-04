@@ -22,7 +22,8 @@ const Food = (state = initialState, action) => {
         case SET_DATA_FOOD:
             return {...state, loading: false, foods: action.payload, foods_cache: action.payload}
         case GET_FOOD:
-            return {...state, loading: false, food: state.foods.find(({id}) => id == action.payload)}
+            let foodId = parseInt(action.payload)
+            return {...state, loading: false, food: state.foods.find(({id}) => id === foodId)}
         case INCREMENT_FOOD_COUNT:
             return {...state, food_count: state.food_count + 1}
         case DECREMENT_FOOD_COUNT:

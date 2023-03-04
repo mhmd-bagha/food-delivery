@@ -26,7 +26,7 @@ const Header = ({addFavorite, foodId, userId, favorite}) => {
 
     useEffect(() => {
         existFoodFavorite()
-    }, [])
+    }, [existFoodFavorite])
 
     return (
         <>

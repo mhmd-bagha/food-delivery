@@ -21,7 +21,7 @@ const Menu = ({imageProfile = true, textCurrentPage = undefined, customClass = '
                                                                             className="text-white"/>
                 </button>
                 {/* text current page */}
-                {textCurrentPage != undefined ?
+                {textCurrentPage !== undefined ?
                     <p className="text-gray-200 font-medium text-lg">{textCurrentPage}</p> : null}
                 {/* image person */}
                 {imageProfile ? <ImageProfile/> : null}

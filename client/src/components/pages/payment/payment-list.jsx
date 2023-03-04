@@ -4,10 +4,6 @@ const PaymentList = ({setTypePay}) => {
 
     const [element, setElement] = useState("label_credit-card") // get/set id element state
 
-    useEffect(() => {
-        changeActivePay()
-    }, [element])
-
     const changeActivePay = () => {
         var getRadios = document.querySelectorAll('label') // get all radios button
         // for all radios and delete class active
@@ -22,6 +18,10 @@ const PaymentList = ({setTypePay}) => {
         setElement(element_label)
         setTypePay(type_payment)
     }
+
+    useEffect(() => {
+        changeActivePay()
+    }, [changeActivePay])
 
     return (
         <>
