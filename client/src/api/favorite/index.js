@@ -11,9 +11,9 @@ export const addFavorite = async (data, dispatch) => {
     }
 }
 
-export const getFavorites = async (userId, dispatch) => {
+export const getFavorites = async (dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.post('/favorites/', userId)
+    const res = await axiosInstance.post('/favorites/')
     try {
         dispatch(getFoodFavorites(res.data.data))
     } catch (err) {
