@@ -5,6 +5,8 @@ on:
     branches: [ "deploy" ]
   pull_request:
     branches: [ "deploy" ]
+    paths:
+      - 'api/'
 
 jobs:
   deploy:
