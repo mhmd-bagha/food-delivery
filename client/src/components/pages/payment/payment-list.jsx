@@ -1,18 +1,19 @@
 import {useEffect, useState} from "react";
+import {useCallback} from "@types/react";
 
 const PaymentList = ({setTypePay}) => {
 
     const [element, setElement] = useState("label_credit-card") // get/set id element state
 
-    const changeActivePay = () => {
-        var getRadios = document.querySelectorAll('label') // get all radios button
+    const changeActivePay = useCallback(() => {
+        let getRadios = document.querySelectorAll('label') // get all radios button
         // for all radios and delete class active
         getRadios.forEach((e) => {
             e.classList.remove('bg-white')
         })
-        var getRadio = document.getElementById(element) // get id from element
+        let getRadio = document.getElementById(element) // get id from element
         getRadio.classList.add('bg-white') // change bg to white
-    }
+    }, [element])
 
     const setPaymentWith = (type_payment, element_label) => {
         setElement(element_label)
@@ -40,7 +41,7 @@ const PaymentList = ({setTypePay}) => {
                         {/* name */}
                         <p className="pl-7 font-medium text_pay">Credit Card</p>
                         {/* dot radio */}
-                        <div className="ml-auto dot"></div>
+                        <div className="ml-auto dot"/>
                     </label>
                 </div>
                 {/* paypal */}
@@ -56,7 +57,7 @@ const PaymentList = ({setTypePay}) => {
                         {/* name */}
                         <p className="pl-7 font-medium text_pay">Paypal</p>
                         {/* dot radio */}
-                        <div className="ml-auto dot"></div>
+                        <div className="ml-auto dot"/>
                     </label>
                 </div>
                 {/* google play */}
@@ -72,7 +73,7 @@ const PaymentList = ({setTypePay}) => {
                         {/* name */}
                         <p className="pl-7 font-medium text_pay">Google Play</p>
                         {/* dot radio */}
-                        <div className="ml-auto dot"></div>
+                        <div className="ml-auto dot"/>
                     </label>
                 </div>
             </div>
