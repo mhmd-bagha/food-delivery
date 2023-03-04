@@ -4,15 +4,6 @@ import {useEffect} from "react";
 const FoodCategory = ({getCategoryFood, foodCategory, getFood, foods_cache, setFoodsCache}) => {
     let {categoryId} = useParams()
 
-    useEffect(() => {
-        getCategoryFood()
-        getFoodByCategoryId()
-    }, [])
-    // search category when clicked the link category
-    const searchFoodByCategory = (category_id) => {
-        setFoodsCache(foods_cache)
-        getFood(category_id)
-    }
     // search category when exist category id in url
     const getFoodByCategoryId = () => {
         if (typeof categoryId !== 'undefined') {
@@ -20,6 +11,18 @@ const FoodCategory = ({getCategoryFood, foodCategory, getFood, foods_cache, setF
             searchFoodByCategory(categoryId)
         }
     }
+
+    // search category when clicked the link category
+    const searchFoodByCategory = (category_id) => {
+        setFoodsCache(foods_cache)
+        getFood(category_id)
+    }
+
+    useEffect(() => {
+        getCategoryFood()
+        getFoodByCategoryId()
+    }, [getCategoryFood, getFoodByCategoryId])
+
 
     return (<>
         <div className="flex gap-10 mt-7 overflow-x-scroll py-3 color-auro_metal_saurus text-lg">
