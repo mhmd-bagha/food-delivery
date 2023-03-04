@@ -18,9 +18,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install surge
       - run: npm i -g surge
-      - name: Install Dependecies
-      - run: cd ./client && npm i
-      - name: Deploying...
+      - run: cd ./client/ && npm install
       - run: surge ./client/ ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
