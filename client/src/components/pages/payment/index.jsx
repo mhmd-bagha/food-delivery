@@ -6,7 +6,7 @@ import CouponTaxation from "./coupon-taxation";
 import TotalPriceNext from "../../ui/total-price-next";
 import {connect} from "react-redux";
 import {setTypePay} from "../../../states/actions/payment";
-import {useEffect, useRef} from "react";
+import {useCallback, useEffect, useRef} from "react";
 import {addPayment} from "../../../api/payment";
 
 const Payment = ({cart, setTypePay, payment, addPay}) => {
@@ -14,11 +14,11 @@ const Payment = ({cart, setTypePay, payment, addPay}) => {
     const btnPay = useRef(null)
     const totalPriceTaxation = parseInt(cart.total_price) + parseInt(payment.taxation) // addition total price with taxation
 
-    const pay = () => {
+    const pay = useCallback(() => {
         btnPay.current.addEventListener('click', () => {
             return addPay({coupon: coupon.current.value, total_price: totalPriceTaxation, type_pay: payment.type})
         })
-    }
+    }, [addPay, payment.type, totalPriceTaxation])
 
     useEffect(() => {
         pay()

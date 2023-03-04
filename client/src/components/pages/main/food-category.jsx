@@ -1,22 +1,22 @@
 import {NavLink, useParams} from "react-router-dom";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 
 const FoodCategory = ({getCategoryFood, foodCategory, getFood, foods_cache, setFoodsCache}) => {
     let {categoryId} = useParams()
-
-    // search category when exist category id in url
-    const getFoodByCategoryId = () => {
-        if (typeof categoryId !== 'undefined') {
-            categoryId = parseInt(categoryId)
-            searchFoodByCategory(categoryId)
-        }
-    }
+    categoryId = parseInt(categoryId) // change typeof to int
 
     // search category when clicked the link category
-    const searchFoodByCategory = (category_id) => {
+    const searchFoodByCategory = useCallback((category_id) => {
         setFoodsCache(foods_cache)
         getFood(category_id)
-    }
+    }, [foods_cache, getFood, setFoodsCache])
+
+    // search category when exist category id in url
+    const getFoodByCategoryId = useCallback(() => {
+        if (typeof categoryId !== 'undefined') {
+            searchFoodByCategory(categoryId)
+        }
+    }, [categoryId, searchFoodByCategory])
 
     useEffect(() => {
         getCategoryFood()
