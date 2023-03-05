@@ -7,23 +7,23 @@ const Header = ({addFavorite, foodId, userId, favorite}) => {
 
     // default color icon add to favorite
     let defaultColor = 'text-white'
-    
+
     const addFoodFavorite = () => {
         addFavorite({food_id: foodId, user_id: userId})
         setColorFavorite('color-red_coral')
     }
-
-    const existFoodFavorite = useCallback(() => {
-        let existFavorite = favorite.find(({id, user_id}) => user_id === userId && id === foodId) // check exist food in favorite
-        defaultColor = (existFavorite) ? defaultColor = 'color-red_coral' : defaultColor
-        setColorFavorite(defaultColor)
-    }, [])
 
     // set color
     const setColorFavorite = (color) => {
         const favorite_icon = document.getElementById('favorite_icon')
         return favorite_icon.classList.add(color)
     }
+
+    const existFoodFavorite = useCallback(() => {
+        let existFavorite = favorite.find(({id, user_id}) => user_id === userId && id === foodId)
+        let colorActiveFoodFavorite = (existFavorite) ? 'color-red_coral' : defaultColor
+        setColorFavorite(colorActiveFoodFavorite)
+    }, [favorite, defaultColor, userId, foodId])
 
     useEffect(() => {
         existFoodFavorite()
