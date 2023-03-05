@@ -20,7 +20,7 @@ jobs:
       - name: Copy .env
         run: cd ./api/ && php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies composer.json
-        run: cd ./api/ && composer update --optimize-autoloader --no-dev
+        run: cd ./api/ && composer update --no-dev
       - name: Install Dependencies package.json
         run: cd ./api/ && npm install
       - name: Directory Permissions
