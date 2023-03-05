@@ -6,7 +6,7 @@ const Header = ({addFavorite, foodId, userId, favorite}) => {
     foodId = parseInt(foodId) // change typeof food id to int
 
     // default color icon add to favorite
-    let defaultColor = 'text-white'
+    const defaultColor = 'text-white'
 
     const addFoodFavorite = () => {
         addFavorite({food_id: foodId, user_id: userId})
@@ -20,10 +20,13 @@ const Header = ({addFavorite, foodId, userId, favorite}) => {
     }
 
     const existFoodFavorite = useCallback(() => {
-        let existFavorite = favorite.find(({id, user_id}) => user_id === userId && id === foodId)
-        let colorActiveFoodFavorite = (existFavorite) ? 'color-red_coral' : defaultColor
+        let colorActiveFoodFavorite = defaultColor
+
+        if (favorite.favorite && favorite.favorite.find(({id, user_id}) => user_id === userId && id === foodId))
+            colorActiveFoodFavorite = 'color-red_coral'
+
         setColorFavorite(colorActiveFoodFavorite)
-    }, [favorite, defaultColor, userId, foodId])
+    }, [favorite, userId, foodId])
 
     useEffect(() => {
         existFoodFavorite()
