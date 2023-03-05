@@ -17,10 +17,8 @@ jobs:
         with:
           php-version: '8.2.2'
       - uses: actions/checkout@v3
-      - name: Copy .env
-        run: cd ./api/ && php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies composer.json
-        run: cd ./api/ && composer update --no-dev
+        run: cd ./api/ && composer update
       - name: Install Dependencies package.json
         run: cd ./api/ && npm install
       - name: Directory Permissions
