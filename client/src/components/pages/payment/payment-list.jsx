@@ -1,5 +1,4 @@
-import {useEffect, useState} from "react";
-import {useCallback} from "@types/react";
+import {useCallback, useEffect, useState} from "react";
 
 const PaymentList = ({setTypePay}) => {
 
