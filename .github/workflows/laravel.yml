@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "deploy" ]
     paths:
-      - 'api/'
+      - api/
 
 jobs:
   deploy:
@@ -20,7 +20,8 @@ jobs:
       - name: Copy .env
         run: cd ./api/ && php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Install Dependencies
-        run: cd ./api/ && composer update
+        - run: cd ./api/ && composer update
+        - run: cd ./api/ && npm install
       - name: Generate key
         run: cd ./api/ && php artisan key:generate
       - name: Config cache
