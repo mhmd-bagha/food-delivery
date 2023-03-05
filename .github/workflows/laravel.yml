@@ -23,14 +23,16 @@ jobs:
         run: cd ./api/ && composer install --optimize-autoloader --no-dev
       - name: Install Dependencies package.json
         run: cd ./api/ && npm install
+      - name: Directory Permissions and delete config cache
+          run: cd ./api/ && chmod -R 777 storage bootstrap/cache && rm bootstrap/cache/config.php
       - name: Generate key
         run: cd ./api/ && php artisan key:generate
       - name: Config cache
         run: cd ./api/ && php artisan config:cache
       - name: route cache
         run: cd ./api/ && php artisan route:cache
-      - name: Directory Permissions
-        run: cd ./api/ && chmod -R 777 storage bootstrap/cache
+      - name: Optimize cache
+        run: cd ./api/ && php artisan optimize:clear
       - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
