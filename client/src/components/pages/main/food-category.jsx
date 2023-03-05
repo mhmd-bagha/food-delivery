@@ -13,9 +13,7 @@ const FoodCategory = ({getCategoryFood, foodCategory, getFood, foods_cache, setF
 
     // search category when exist category id in url
     const getFoodByCategoryId = useCallback(() => {
-        if (typeof categoryId !== 'undefined') {
-            searchFoodByCategory(categoryId)
-        }
+        return (typeof categoryId !== 'undefined') ?? searchFoodByCategory(categoryId)
     }, [categoryId, searchFoodByCategory])
 
     useEffect(() => {
@@ -26,6 +24,9 @@ const FoodCategory = ({getCategoryFood, foodCategory, getFood, foods_cache, setF
 
     return (<>
         <div className="flex gap-10 mt-7 overflow-x-scroll py-3 color-auro_metal_saurus text-lg">
+
+            <NavLink to='/' className="food_category" onClick={() => setFoodsCache(foods_cache)}>all</NavLink>
+
             {foodCategory.data && foodCategory.data.map((category, index) => (
                 <NavLink to={`/category/${category.category_name}/${category.id}`} className="food_category"
                          onClick={() => searchFoodByCategory(category.id)}
