@@ -23,8 +23,8 @@ jobs:
         run: cd ./api/ && composer install --optimize-autoloader --no-dev
       - name: Install Dependencies package.json
         run: cd ./api/ && npm install
-      - name: Directory Permissions and delete config cache
-        run: cd ./api/ && chmod -R 777 storage bootstrap/cache && rm bootstrap/cache/config.php
+      - name: Directory Permissions
+        run: cd ./api/ && chmod -R 777 storage bootstrap/cache
       - name: Generate key
         run: cd ./api/ && php artisan key:generate
       - name: Config cache
