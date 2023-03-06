@@ -2,7 +2,7 @@ import {ERROR_API, TYPE_PAYMENT, START_API, ADD_PAYMENT} from "../actions-type/p
 
 const initialState = {
     type: 'credit-card',
-    taxation: 1500,
+    taxation: 0,
     loading: false,
     message: ''
 }
