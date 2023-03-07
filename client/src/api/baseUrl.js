@@ -6,8 +6,7 @@ const axiosInstance = axios.create({
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${GetToken()}`,
-        'Access-Control-Allow-Origin': '*'
+        'Authorization': `Bearer ${GetToken()}`
     },
     referrerPolicy: 'no-referrer'
 })
