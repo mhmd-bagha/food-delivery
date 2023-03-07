@@ -5,11 +5,9 @@ const PaymentList = ({setTypePay}) => {
     const [element, setElement] = useState("label_credit-card") // get/set id element state
 
     const changeActivePay = useCallback(() => {
-        let getRadios = document.querySelectorAll('label') // get all radios button
+        let getAllRadios = document.querySelectorAll('label')
         // for all radios and delete class active
-        getRadios.forEach((e) => {
-            e.classList.remove('bg-white')
-        })
+        getAllRadios.forEach((e) => e.classList.remove('bg-white'))
         let getRadio = document.getElementById(element) // get id from element
         getRadio.classList.add('bg-white') // change bg to white
     }, [element])
