@@ -3,8 +3,8 @@ import {addFoodCart, deleteFoodCart, errorApi, fetchDataCart, startApi} from "..
 
 export const addFood = async (data, dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.post('/cart/add', data)
     try {
+        const res = await axiosInstance.post('/cart/add', data)
         dispatch(addFoodCart(res.data.message))
     } catch (err) {
         dispatch(errorApi(err.data))
@@ -13,8 +13,8 @@ export const addFood = async (data, dispatch) => {
 
 export const getCart = async (dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.post('/cart/get')
     try {
+        const res = await axiosInstance.post('/cart/get')
         dispatch(fetchDataCart(res.data.data, res.data.totalPrice))
     } catch (err) {
         dispatch(errorApi(err.data))
@@ -23,8 +23,8 @@ export const getCart = async (dispatch) => {
 
 export const deleteFood = async (cartId, foodId, dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.delete(`/cart/delete/cart-id/${cartId}/food-id/${foodId}`)
     try {
+        const res = await axiosInstance.delete(`/cart/delete/cart-id/${cartId}/food-id/${foodId}`)
         dispatch(deleteFoodCart(foodId, res.data.message))
     } catch (err) {
         dispatch(errorApi(err.data))

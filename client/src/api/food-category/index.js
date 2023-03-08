@@ -3,8 +3,8 @@ import {errorApiFoodCategory, setDataFoodCategory, startApiFoodCategory} from ".
 
 const getFoodCategory = async (dispatch) => {
     dispatch(startApiFoodCategory)
-    const res = await axiosInstance.post('/food/categories')
     try {
+        const res = await axiosInstance.post('/food/categories')
         dispatch(setDataFoodCategory(res.data))
     } catch (err) {
         dispatch(errorApiFoodCategory(err.data))
