@@ -3,8 +3,8 @@ import {addFoodFavorite, deleteFoodFavorite, errorApi, getFoodFavorites, startAp
 
 export const addFavorite = async (data, dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.post('/favorites/add', data)
     try {
+        const res = await axiosInstance.post('/favorites/add', data)
         dispatch(addFoodFavorite(res.data.message))
     } catch (err) {
         dispatch(errorApi(err.data))
@@ -13,8 +13,8 @@ export const addFavorite = async (data, dispatch) => {
 
 export const getFavorites = async (dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.post('/favorites/')
     try {
+        const res = await axiosInstance.post('/favorites/')
         dispatch(getFoodFavorites(res.data.data))
     } catch (err) {
         dispatch(errorApi(err.data))
@@ -23,8 +23,8 @@ export const getFavorites = async (dispatch) => {
 
 export const deleteFavorite = async (favoriteId, dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.delete('/favorites/delete/' + favoriteId)
     try {
+        const res = await axiosInstance.delete('/favorites/delete/' + favoriteId)
         dispatch(deleteFoodFavorite(favoriteId, res.data.message))
     } catch (err) {
         dispatch(errorApi(err.data))

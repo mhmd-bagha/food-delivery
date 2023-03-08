@@ -3,8 +3,8 @@ import {errorApi, login, refreshToken, signup, startApi} from "../../states/acti
 
 export const loginAuth = async (data, dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.post('/user/login', data)
     try {
+        const res = await axiosInstance.post('/user/login', data)
         dispatch(login(res.data))
     } catch (err) {
         dispatch(errorApi(err.data))
@@ -13,8 +13,8 @@ export const loginAuth = async (data, dispatch) => {
 
 export const signupAuth = async (data, dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.post('/user/signup', data)
     try {
+        const res = await axiosInstance.post('/user/signup', data)
         dispatch(signup(res.data))
     } catch (err) {
         dispatch(errorApi(err.data))
@@ -23,8 +23,8 @@ export const signupAuth = async (data, dispatch) => {
 
 export const refreshTokenAuth = async (dispatch) => {
     dispatch(startApi())
-    const res = await axiosInstance.post('/user/refresh-token')
     try {
+        const res = await axiosInstance.post('/user/refresh-token')
         dispatch(refreshToken(res.data))
     } catch (err) {
         dispatch(errorApi(err.data))
