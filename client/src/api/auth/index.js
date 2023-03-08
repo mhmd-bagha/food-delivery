@@ -1,5 +1,5 @@
 import axiosInstance from "../baseUrl";
-import {errorApi, login, refreshToken, signup, startApi} from "../../states/actions/user";
+import {errorApi, login, signup, startApi} from "../../states/actions/user";
 
 export const loginAuth = async (data, dispatch) => {
     dispatch(startApi())
@@ -21,12 +21,11 @@ export const signupAuth = async (data, dispatch) => {
     }
 }
 
-export const refreshTokenAuth = async (dispatch) => {
-    dispatch(startApi())
+export const refreshTokenAuth = async () => {
     try {
         const res = await axiosInstance.post('/user/refresh-token')
-        dispatch(refreshToken(res.data))
+        return res.data.access_token
     } catch (err) {
-        dispatch(errorApi(err.data))
+        return err.data
     }
 }
