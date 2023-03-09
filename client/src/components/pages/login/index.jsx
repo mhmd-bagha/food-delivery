@@ -28,7 +28,7 @@ const Login = ({login, signup, user}) => {
                     <div className="px-12 relative -top-3">
                         {/* login */}
                         <TabPanel>
-                            <LoginView login={login}/>
+                            <LoginView login={login} user={user}/>
                         </TabPanel>
                         {/* sign up */}
                         <TabPanel>
