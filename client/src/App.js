@@ -3,19 +3,14 @@ import './styles/index.css'
 import {connect} from "react-redux";
 import Protected from "./routes/protected";
 import Public from "./routes/public";
-import {refreshTokenAuth} from "./api/auth";
-import {useRefreshToken} from "./components/tools/auth-user";
-import {useEffect} from "react";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from "react-toastify";
 
-function App({user, refreshTokenAuth}) {
-    const reToken = useRefreshToken(user, refreshTokenAuth)
-
-    useEffect(() => {
-        return reToken
-    }, [reToken])
-
+function App({user}) {
     return (
         <>
+            {/* import toast container */}
+            <ToastContainer/>
             <Routes>
                 {Public(user)}
                 {Protected(user)}
@@ -30,10 +25,4 @@ const mapToStateProps = (state) => {
     }
 }
 
-const mapToDispatchProps = (dispatch) => {
-    return {
-        refreshTokenAuth: () => refreshTokenAuth(dispatch)
-    }
-}
-
-export default connect(mapToStateProps, mapToDispatchProps)(App)
+export default connect(mapToStateProps, null)(App)

@@ -2,14 +2,29 @@ import {Link} from "react-router-dom";
 import {object, string} from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
+import {useRef} from "react";
 
-const LoginView = ({login}) => {
+const LoginView = ({login, user}) => {
+    const loginBtn = useRef(null)
+
     const validator = object({
         email: string().trim().email().required(),
         password: string().min(6).required(),
     })
     const {register, handleSubmit, formState: {errors}} = useForm({resolver: yupResolver(validator)})
-    const loginHandle = (data) => login(data)
+    const loginHandle = (data) => {
+
+        loginDisabled()
+
+        login(data).then(() => {
+            loginBtn.current.disabled = false
+        })
+
+    }
+
+    const loginDisabled = () => {
+        loginBtn.current.disabled = true
+    }
 
     return (
         <form action="/" method="post" onSubmit={handleSubmit(loginHandle)}>
@@ -34,7 +49,8 @@ const LoginView = ({login}) => {
             </div>
             {/* submit button */}
             <button type="submit"
-                    className="bg_red_coral text-white text-lg font-bold w-full py-3.5 mt-16 rounded-2xl">Login
+                    className="bg_red_coral text-white text-lg font-bold w-full py-3.5 mt-16 rounded-2xl"
+                    ref={loginBtn}>Login
             </button>
         </form>
     )
