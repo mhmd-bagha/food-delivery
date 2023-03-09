@@ -1,10 +1,11 @@
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {object, string} from "yup";
-import {useRef} from "react";
+import {useRef, useState} from "react";
 
 const SignupView = ({signup, user}) => {
     const signupBtn = useRef(null)
+    const [signupStatus, setSignupStatus] = useState(false) // change value signup button
 
     const validator = object({
         full_name: string().trim().min(3).required(),
@@ -18,11 +19,13 @@ const SignupView = ({signup, user}) => {
 
         signup(data).then(() => {
             signupBtn.current.disabled = false
+            setSignupStatus(false)
         })
     }
 
     const signupDisabled = () => {
         signupBtn.current.disabled = true
+        setSignupStatus(true)
     }
 
     return (
@@ -51,8 +54,7 @@ const SignupView = ({signup, user}) => {
             {/* submit button */}
             <button type="submit"
                     className="bg_red_coral text-white text-lg font-bold w-full py-3.5 mt-10 rounded-2xl"
-                    ref={signupBtn}>Sign
-                up
+                    ref={signupBtn}>{signupStatus ? 'Registering...' : 'Sign up'}
             </button>
         </form>
     )
