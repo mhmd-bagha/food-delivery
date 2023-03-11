@@ -1,4 +1,7 @@
 import {isExpired} from "react-jwt";
+import {useDispatch} from "react-redux";
+import {refreshTokenAuth} from "../../api/auth";
+import {refreshToken} from "../../states/actions/user";
 
 // export const SetToken = (token) => {
 //     useJwt(token)
@@ -18,6 +21,21 @@ export const GetToken = () => {
         return user.token
     } catch (err) {
         return null
+    }
+}
+
+export const useUpdateToken = (user) => {
+    const dispatch = useDispatch();
+
+    if (user.auth) {
+        const expiredToken = ExpiredToken(user.token)
+        if (expiredToken) {
+            // send request for refresh token then change token in store
+            refreshTokenAuth().then((newToken) => {
+                dispatch(refreshToken(newToken))
+                window.location.reload()
+            })
+        }
     }
 }
 
