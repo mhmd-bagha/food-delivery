@@ -1,6 +1,5 @@
 import axios from "axios";
 import {GetToken} from "../components/tools/auth-user";
-import {refreshTokenAuth} from "./auth";
 
 const axiosInstance = axios.create({
     baseURL: 'https://sample-food.bebest20.ir/api',
@@ -20,19 +19,5 @@ axiosInstance.interceptors.request.use(
     error => {
         return Promise.reject(error)
     });
-
-// after response and refresh token then send request
-axiosInstance.interceptors.response.use((response) => {
-    return response
-}, async function (error) {
-    const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
-        const access_token = await refreshTokenAuth();
-        axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-        return axiosInstance(originalRequest);
-    }
-    return Promise.reject(error);
-});
 
 export default axiosInstance
