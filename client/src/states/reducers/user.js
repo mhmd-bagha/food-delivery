@@ -29,7 +29,7 @@ const User = (state = initialState, action) => {
             }
             break;
         case REFRESH_TOKEN:
-            return {...state, loading: false, token: action.payload.access_token}
+            return {...state, loading: false, token: action.payload}
         case ERROR_API:
             return {...state, loading: false, message: action.message}
         default:
