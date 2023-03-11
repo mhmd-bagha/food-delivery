@@ -38,8 +38,8 @@ export const signupAuth = async (data, dispatch) => {
 export const refreshTokenAuth = async () => {
     try {
         const res = await axiosInstance.post('/user/refresh-token')
-        return res.data.access_token
+        return Promise.resolve(res.data.access_token)
     } catch (err) {
-        return err.data
+        return Promise.reject(err)
     }
 }
