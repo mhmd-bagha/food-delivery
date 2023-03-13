@@ -5,20 +5,22 @@ import Header from "./header";
 import CouponTaxation from "./coupon-taxation";
 import TotalPriceNext from "../../ui/total-price-next";
 import {connect} from "react-redux";
-import {setTypePay} from "../../../states/actions/payment";
-import {useCallback, useEffect, useRef} from "react";
+// import {setTypePay} from "../../../states/actions/payment";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {addPayment} from "../../../api/payment";
 
-const Payment = ({cart, setTypePay, payment, addPay}) => {
+const Payment = ({cart, payment, addPay}) => {
     const coupon = useRef(null)
     const btnPay = useRef(null)
+    const [typePay, setTypePay] = useState('credit-card')
+
     const totalPriceTaxation = parseInt(cart.total_price) + parseInt(payment.taxation) // addition total price with taxation
 
     const pay = useCallback(() => {
         btnPay.current.addEventListener('click', () => {
-            return addPay({coupon: coupon.current.value, total_price: totalPriceTaxation, type_pay: payment.type})
+            return addPay({payment_type: typePay})
         })
-    }, [addPay, payment.type, totalPriceTaxation])
+    }, [addPay, typePay])
 
     useEffect(() => {
         pay()
@@ -38,7 +40,7 @@ const Payment = ({cart, setTypePay, payment, addPay}) => {
                     <CouponTaxation coupon={coupon} taxation={payment.taxation}/>
                 </div>
                 {/* total price and next top level */}
-                <TotalPriceNext totalPrice={totalPriceTaxation} linkText='Order Now' linkUrl='payment'
+                <TotalPriceNext totalPrice={totalPriceTaxation} linkText='Order Now' linkUrl='delivery-information'
                                 buttonRef={btnPay}/>
             </section>
         </>
@@ -53,7 +55,7 @@ const mapToStateProps = (state) => {
 }
 const mapToDispatchProps = (dispatch) => {
     return {
-        setTypePay: (type_payment) => dispatch(setTypePay(type_payment)),
+        // setTypePay: (type_payment) => dispatch(setTypePay(type_payment)),
         addPay: (data) => addPayment(data, dispatch)
     }
 }

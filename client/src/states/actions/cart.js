@@ -4,10 +4,11 @@ export const startApi = () => ({
     type: START_API
 })
 
-export const fetchDataCart = (data, total_price) => ({
+export const fetchDataCart = (data, total_price, cart_id) => ({
     type: SET_DATA_CART,
     payload: data,
-    total_price
+    total_price,
+    cart_id
 })
 
 export const addFoodCart = (message) => ({

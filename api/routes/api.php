@@ -7,6 +7,7 @@ use App\Http\Controllers\FoodCategoryController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\CartController;
 use \App\Http\Controllers\FavoriteController;
+use \App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,10 @@ Route::prefix('cart')->group(function () {
     Route::post('/add', [CartController::class, 'addFood']);
     Route::post('/get', [CartController::class, 'getCart']);
     Route::delete('/delete/cart-id/{cartId}/food-id/{foodId}', [CartController::class, 'deleteFood']);
+})->middleware(['jwt.auth', 'auth:api']);
+// the routes payment
+Route::prefix('payment')->group(function () {
+    Route::post('/add', [PaymentController::class, 'add']);
 })->middleware(['jwt.auth', 'auth:api']);
 // add/get favorite
 Route::prefix('favorites')->group(function () {
