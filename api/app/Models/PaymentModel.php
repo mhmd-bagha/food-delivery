@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentModel extends Model
 {
     use HasFactory;
+
     protected $table = 'payment';
     protected $fillable = ['user_id', 'cart_id', 'amount', 'payment_type', 'status', 'ip'];
+
+    public function add($data)
+    {
+        return Model::create($data);
+    }
 }
