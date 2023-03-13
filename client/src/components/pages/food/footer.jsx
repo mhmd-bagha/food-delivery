@@ -10,9 +10,9 @@ const Footer = ({food, addFoodCart, food_id, food_count}) => {
     }
     return (
         <>
-            {food && <div className="bg_dark">
+            {food && <div className="bg_dark sticky bottom-0">
                 <div
-                    className="flex justify-between items-center bg_mirage w-full px-5 sm:px-14 py-11 sm:py-3">
+                    className="flex justify-between items-center bg_mirage w-full px-5 sm:px-14 py-5 sm:py-3">
                     {/* price */}
                     <p className="text-xl text-gray-50 font-bold">${priceFormat(food.food_price)}</p>
                     {/* add to cart */}
