@@ -40,7 +40,7 @@ const Payment = ({cart, payment, addPay}) => {
                     <CouponTaxation coupon={coupon} taxation={payment.taxation}/>
                 </div>
                 {/* total price and next top level */}
-                <TotalPriceNext totalPrice={totalPriceTaxation} linkText='Order Now' linkUrl='payment'
+                <TotalPriceNext totalPrice={totalPriceTaxation} linkText='Order Now' linkUrl='delivery-information'
                                 buttonRef={btnPay}/>
             </section>
         </>
