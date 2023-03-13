@@ -15,9 +15,9 @@ export const getCart = async (dispatch) => {
     dispatch(startApi())
     try {
         const res = await axiosInstance.post('/cart/get')
-        dispatch(fetchDataCart(res.data.data, res.data.totalPrice))
+        dispatch(fetchDataCart(res.data.data, res.data.totalPrice, res.data.cart_id))
     } catch (err) {
-        dispatch(errorApi(err.data))
+        dispatch(errorApi(err))
     }
 }
 

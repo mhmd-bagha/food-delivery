@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->bigInteger('user_id')->index();
             $table->bigInteger('cart_id');
             $table->string('amount', 20);
-            $table->enum('payment_type', ['paypal', 'google-play', 'credit-cart']);
+            $table->enum('payment_type', ['paypal', 'google-play', 'credit-card']);
             $table->enum('status', ['paid', 'unpaid', 'pending']);
             $table->string('ip');
             $table->string('create_at', 20);
