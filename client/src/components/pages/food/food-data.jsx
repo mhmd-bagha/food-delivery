@@ -5,17 +5,17 @@ const FoodData = ({food, foodCount, plusFoodCount, minusFoodCount}) => {
     return (
         <>
             {/* food data */}
-            <div className="mt-2 flex justify-center">
+            <div className="mt-3 md:mt-4 flex justify-center">
                 {food && <div>
                     {/* food name */}
                     <h3 className="text-white text-2xl font-medium text-center">{food.food_name}</h3>
                     {/* food image */}
                     <img src={food.food_image} alt="sushi"
-                         className="w-1/2 h-auto mx-auto"/>
+                         className="w-2/3 lg:w-1/4 h-auto mx-auto"/>
                     {/* food count */}
                     <div className="flex justify-center">
                         <div
-                            className="flex justify-between items-center bg_mirage text-white w-2/4 sm:w-1/4 md:w-1/4 lg:w-1/4 relative top-5 rounded-3xl">
+                            className="flex justify-between items-center bg_mirage text-white w-2/4 sm:w-1/4 2xl:w-1/6 relative top-5 rounded-3xl">
                             {/* button minus food */}
                             <button className="p-2.5 bg_dark rounded-full border border-gray-700"
                                     onClick={() => minusFoodCount()} disabled={(foodCount === 1)}>
