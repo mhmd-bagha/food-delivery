@@ -82,13 +82,14 @@ class CartController extends Controller
 
         if ($get_cart) {
             $totalPrice = $get_cart->total_amount;
+            $cart_id = $get_cart->id;
             $cart_items = $get_cart->foods()->get()->toarray();
             // get food and add to array
             foreach ($cart_items as $cart_item):
                 $get_food = FoodModel::find($cart_item['food_id'])->toArray();
                 $foods_information[] = Arr::collapse([['cart' => $cart_item], $get_food]);
             endforeach;
-            $this->messages = ['data' => $foods_information, 'totalPrice' => $totalPrice, 'status' => 200];
+            $this->messages = ['data' => $foods_information, 'totalPrice' => $totalPrice, 'cart_id' => $cart_id, 'status' => 200];
         } else
             $this->messages = ['message' => 'The empty cart', 'status' => 500];
 
