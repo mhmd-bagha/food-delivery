@@ -3,7 +3,7 @@ import {ShowHideMenu} from "../../../states/actions/menu";
 import {HiOutlineBars2} from "react-icons/hi2";
 import ImageProfile from "./image-profile";
 import {IoBagHandleOutline, IoCloseSharp} from "react-icons/io5";
-import {Link, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {FiHeart} from "react-icons/fi";
 import {VscHistory} from "react-icons/vsc";
 import {AiOutlineFileText, AiOutlineMessage} from "react-icons/ai";
