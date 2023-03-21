@@ -8,9 +8,25 @@ import {FiHeart} from "react-icons/fi";
 import {VscHistory} from "react-icons/vsc";
 import {AiOutlineFileText, AiOutlineMessage} from "react-icons/ai";
 import {CiLogout} from "react-icons/ci";
+import {logout} from "../../../states/actions/user";
+import {successToast} from "../../tools/toast-alert";
 
-const Menu = ({imageProfile = true, textCurrentPage = undefined, customClass = 'px-12', menu, setStatusMenu}) => {
+const Menu = ({
+                  imageProfile = true,
+                  textCurrentPage = undefined,
+                  customClass = 'px-12',
+                  menu,
+                  setStatusMenu,
+                  logout
+              }) => {
     let classShowMenu = menu.menu ? 'right-0 left-0' : 'left-full' // the class show/hide menu
+
+    const btnLogout = () => {
+        logout()
+        setStatusMenu(false)
+        successToast('You have successfully logged out')
+    }
+
     return (
         <>
             {/* profile image and button open menu */}
@@ -66,10 +82,10 @@ const Menu = ({imageProfile = true, textCurrentPage = undefined, customClass = '
                 {/* footer menu */}
                 <div className="absolute bottom-16">
                     {/* user logout */}
-                    <Link to="/logout" className="flex items-center py-4" onClick={() => setStatusMenu(false)}><CiLogout
-                        size={21}
-                        className="color-auro_metal_saurus"/>
-                        <p className="text-gray-200 text-sm font-medium ml-4">Log-out</p></Link>
+                    <button className="flex items-center py-4" onClick={btnLogout}>
+                        <CiLogout size={21} className="color-auro_metal_saurus"/>
+                        <p className="text-gray-200 text-sm font-medium ml-4">Log-out</p>
+                    </button>
                 </div>
             </div>
         </>
@@ -85,7 +101,8 @@ const mapStateToProps = (state) => {
 // dispatch
 const mapDispatchToProps = (dispatch) => {
     return {
-        setStatusMenu: (data) => dispatch(ShowHideMenu(data))
+        setStatusMenu: (data) => dispatch(ShowHideMenu(data)),
+        logout: () => dispatch(logout())
     }
 }
 
