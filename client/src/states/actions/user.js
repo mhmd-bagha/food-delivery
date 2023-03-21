@@ -1,4 +1,4 @@
-import {AUTH_LOGIN, AUTH_SIGNUP, ERROR_API, REFRESH_TOKEN, START_API} from "../actions-type/user";
+import {AUTH_LOGIN, AUTH_SIGNUP, ERROR_API, LOGOUT, REFRESH_TOKEN, START_API} from "../actions-type/user";
 
 export const startApi = () => ({
     type: START_API
@@ -17,6 +17,10 @@ export const signup = (data) => ({
 export const refreshToken = (token) => ({
     type: REFRESH_TOKEN,
     payload: token
+})
+
+export const logout = () => ({
+    type: LOGOUT
 })
 
 export const errorApi = () => ({
