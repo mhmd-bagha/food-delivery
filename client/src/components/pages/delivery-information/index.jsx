@@ -23,7 +23,7 @@ const DeliveryInformation = ({deliveryInformationProps, setCurrentPositionMap, s
                 <div className="px-12 fixed top-8 z-[402] w-full">
                     <div className="flex justify-between items-center">
                         {/* back button */}
-                        <Back/>
+                        <Back address='/'/>
                         {/* current location */}
                         <button id="current_location" className="bg_dark p-2.5 rounded-2xl border border-gray-700" ref={btnCurrentMap}>
                             <TbCurrentLocation size={17} className="text-white"/></button>
@@ -41,7 +41,7 @@ const DeliveryInformation = ({deliveryInformationProps, setCurrentPositionMap, s
                         <div className="w-full flex justify-center mb-5">
                             <button
                                 className="relative after:content-[''] w-16 h-1 bg_auro_metal_saurus rounded-full bottom-4"
-                                onClick={() => deliveryInformationProps.up_down_address_card ? setUpDownAddressCard(false) : setUpDownAddressCard(true)}></button>
+                                onClick={() => deliveryInformationProps.up_down_address_card ? setUpDownAddressCard(false) : setUpDownAddressCard(true)}/>
                         </div>
                         {/* time */}
                         <div className="flex items-center">

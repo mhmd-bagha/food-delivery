@@ -35,10 +35,13 @@ class PaymentController extends Controller
 
         $data = array_merge($data->validated(), ['cart_id' => $cartId, 'user_id' => $user_id, 'status' => self::PAID_STATUS, 'amount' => $totalAmount, 'ip' => $request->ip()]);
 
-        if ($model->add($data))
+        if ($model->add($data)) {
+            $getCart->update(['status' => self::PAID_STATUS]);
             $this->message = ['message' => 'The successful pay food', 'status' => 200];
-        else
+        }
+        else {
             $this->message = ['message' => 'The occurred in pay food', 'status' => 500];
+        }
 
         echo response()->json($this->message)->getContent();
     }
